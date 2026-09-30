@@ -100,11 +100,11 @@ def verify_workflow(wf_path):
         w_link = mm["inputs"][2].get("link")
         h_link = mm["inputs"][3].get("link")
         d_link = mm["inputs"][4].get("link")
-        if not w_link or links[w_link][1] != 33 or links[w_link][2] != 9:
+        if not w_link or links[w_link][1] != 33 or links[w_link][2] != 10:
             errors.append(f"Shot {shot_num} MiniMax (Nodo {mm_id}): Width no está conectado a Director IA.")
-        if not h_link or links[h_link][1] != 33 or links[h_link][2] != 10:
+        if not h_link or links[h_link][1] != 33 or links[h_link][2] != 11:
             errors.append(f"Shot {shot_num} MiniMax (Nodo {mm_id}): Height no está conectado a Director IA.")
-        if not d_link or links[d_link][1] != 33 or links[d_link][2] != 11:
+        if not d_link or links[d_link][1] != 33 or links[d_link][2] != 12:
             errors.append(f"Shot {shot_num} MiniMax (Nodo {mm_id}): Duration no está conectado a Director IA.")
 
     print("✓ Control Maestro de Formato (16:9 / 9:16) y Duración conectado a los 4 MiniMax H3.")

@@ -58,7 +58,7 @@ class CommercialCreativeDirector:
         "STRING", "STRING",
         "STRING", "STRING",
         "STRING", "STRING",
-        "STRING",
+        "STRING", "STRING",
         "INT", "INT", "FLOAT"
     )
 
@@ -67,7 +67,7 @@ class CommercialCreativeDirector:
         "shot_02_image_prompt", "shot_02_video_prompt",
         "shot_03_image_prompt", "shot_03_video_prompt",
         "shot_04_image_prompt", "shot_04_video_prompt",
-        "campaign_plan_json",
+        "campaign_concept", "plan_de_campaña",
         "width", "height", "duration"
     )
 
@@ -112,11 +112,11 @@ class CommercialCreativeDirector:
             s3_vid = parsed_llm.get("shot_03_video_prompt", "")
             s4_img = parsed_llm.get("shot_04_image_prompt", "")
             s4_vid = parsed_llm.get("shot_04_video_prompt", "")
+            concept = parsed_llm.get("campaign_concept", idea.strip())
             plan_json = json.dumps(parsed_llm, indent=2, ensure_ascii=False)
-            return (s1_img, s1_vid, s2_img, s2_vid, s3_img, s3_vid, s4_img, s4_vid, plan_json, width, height, duration)
+            return (s1_img, s1_vid, s2_img, s2_vid, s3_img, s3_vid, s4_img, s4_vid, concept, plan_json, width, height, duration)
 
         # Case 2: Autonomous High-End Creative Director Engine
-        # Synthesize campaign based on Idea and Style
         idea_clean = idea.strip()
         
         # Style presets visual dictionary
@@ -157,7 +157,7 @@ class CommercialCreativeDirector:
             "audio": "pristine luxury sound design"
         })
 
-        # Shot 1: Hero Fusion
+        # Shot 1: Hero Fusion (Model + Product)
         s1_img = (
             f"Commercial hero advertising still for a prestigious luxury campaign based on: '{idea_clean}'. "
             f"Seamless, fotorrealistic composite of the elegant model from image 1 holding the luxury product from image 2. "
@@ -252,6 +252,7 @@ class CommercialCreativeDirector:
             s2_img, s2_vid,
             s3_img, s3_vid,
             s4_img, s4_vid,
+            idea_clean,
             plan_json,
             width, height, duration
         )

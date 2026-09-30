@@ -12,12 +12,13 @@ import json
 with open("workflows/commercial_product_video/workflow.json", "r", encoding="utf-8") as f:
     wf = json.load(f)
 
-# Keep track of existing nodes and links
-existing_nodes = {n["id"]: n for n in wf.get("nodes", [])}
-existing_links = list(wf.get("links", []))
-groups = list(wf.get("groups", []))
+# Keep only original base nodes (1 to 29) and base links (1 to 32)
+existing_nodes = {n["id"]: n for n in wf.get("nodes", []) if n["id"] <= 29}
+existing_links = [l for l in wf.get("links", []) if l[0] <= 32]
+# Filter out group_master and group_assembler if present
+groups = [g for g in wf.get("groups", []) if not g.get("title", "").startswith("🌟") and not g.get("title", "").startswith("🎞️")]
 
-print(f"Loaded existing workflow with {len(existing_nodes)} nodes and {len(existing_links)} links.")
+print(f"Loaded existing base workflow with {len(existing_nodes)} nodes and {len(existing_links)} links.")
 
 # Node 30: IDEA GENERAL DEL ANUNCIO (PrimitiveStringMultiline)
 node_30 = {
@@ -132,7 +133,8 @@ node_33 = {
         {"name": "shot_03_video_prompt", "type": "STRING", "links": [40], "localized_name": "shot_03_video_prompt"},
         {"name": "shot_04_image_prompt", "type": "STRING", "links": [41], "localized_name": "shot_04_image_prompt"},
         {"name": "shot_04_video_prompt", "type": "STRING", "links": [42], "localized_name": "shot_04_video_prompt"},
-        {"name": "campaign_plan_json", "type": "STRING", "links": [], "localized_name": "campaign_plan_json"},
+        {"name": "campaign_concept", "type": "STRING", "links": [], "localized_name": "campaign_concept"},
+        {"name": "plan_de_campaña", "type": "STRING", "links": [], "localized_name": "plan_de_campaña"},
         {"name": "width", "type": "INT", "links": [43, 44, 45, 46], "localized_name": "width"},
         {"name": "height", "type": "INT", "links": [47, 48, 49, 50], "localized_name": "height"},
         {"name": "duration", "type": "FLOAT", "links": [51, 52, 53, 54], "localized_name": "duration"}
@@ -355,23 +357,23 @@ new_links = [
     [41, 33, 6, 25, 3, "STRING"],   # shot_04_image_prompt -> Qwen Shot 4
     [42, 33, 7, 28, 5, "STRING"],   # shot_04_video_prompt -> MiniMax Shot 4
 
-    # Width connections to all 4 MiniMax nodes:
-    [43, 33, 9, 6, 2, "INT"],
-    [44, 33, 9, 16, 2, "INT"],
-    [45, 33, 9, 22, 2, "INT"],
-    [46, 33, 9, 28, 2, "INT"],
+    # Width connections to all 4 MiniMax nodes (out index 10):
+    [43, 33, 10, 6, 2, "INT"],
+    [44, 33, 10, 16, 2, "INT"],
+    [45, 33, 10, 22, 2, "INT"],
+    [46, 33, 10, 28, 2, "INT"],
 
-    # Height connections to all 4 MiniMax nodes:
-    [47, 33, 10, 6, 3, "INT"],
-    [48, 33, 10, 16, 3, "INT"],
-    [49, 33, 10, 22, 3, "INT"],
-    [50, 33, 10, 28, 3, "INT"],
+    # Height connections to all 4 MiniMax nodes (out index 11):
+    [47, 33, 11, 6, 3, "INT"],
+    [48, 33, 11, 16, 3, "INT"],
+    [49, 33, 11, 22, 3, "INT"],
+    [50, 33, 11, 28, 3, "INT"],
 
-    # Duration connections to all 4 MiniMax nodes:
-    [51, 33, 11, 6, 4, "FLOAT"],
-    [52, 33, 11, 16, 4, "FLOAT"],
-    [53, 33, 11, 22, 4, "FLOAT"],
-    [54, 33, 11, 28, 4, "FLOAT"],
+    # Duration connections to all 4 MiniMax nodes (out index 12):
+    [51, 33, 12, 6, 4, "FLOAT"],
+    [52, 33, 12, 16, 4, "FLOAT"],
+    [53, 33, 12, 22, 4, "FLOAT"],
+    [54, 33, 12, 28, 4, "FLOAT"],
 
     # Video Assembler connections:
     [55, 6, 0, 35, 0, "VIDEO"],     # Shot 1 video -> Video Assembler video_1

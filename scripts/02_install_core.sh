@@ -41,8 +41,13 @@ else
     fi
 fi
 
-# 3. Instalar librerías de soporte multimedia
-echo -e "${YELLOW}Instalando librerías multimedia (torchaudio, torchvision, soundfile, av)...${NC}"
-pip install --no-cache-dir torchaudio torchvision soundfile av -q || true
+# 3. Instalar librerías de soporte multimedia y ComfyUI core
+echo -e "${YELLOW}Instalando librerías multimedia (torchaudio, torchvision, soundfile, av, imageio-ffmpeg)...${NC}"
+pip install --no-cache-dir torchaudio torchvision soundfile av imageio-ffmpeg -q || true
+
+if [ -f "$COMFY_ROOT/requirements.txt" ]; then
+    echo -e "${YELLOW}Instalando dependencias de ComfyUI (requirements.txt)...${NC}"
+    pip install --no-cache-dir -r "$COMFY_ROOT/requirements.txt" -q || true
+fi
 
 echo -e "${GREEN}✓ Dependencias Core listas.${NC}"

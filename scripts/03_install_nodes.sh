@@ -78,6 +78,27 @@ if os.path.isdir(local_nodes_dir):
                 shutil.rmtree(dst_item)
             shutil.copytree(src_item, dst_item)
             print(f"   ✓ {item} sincronizado con éxito.")
+
+# 3. Desplegar imágenes de referencia en el directorio input de ComfyUI
+comfy_input_dir = os.path.join(comfy_root, "input")
+os.makedirs(comfy_input_dir, exist_ok=True)
+repo_input_dir = os.path.join(base_dir, "input")
+if os.path.isdir(repo_input_dir):
+    for img_name in os.listdir(repo_input_dir):
+        src_img = os.path.join(repo_input_dir, img_name)
+        dst_img = os.path.join(comfy_input_dir, img_name)
+        if os.path.isfile(src_img):
+            shutil.copyfile(src_img, dst_img)
+            print(f"   ✓ Imagen demo copiada a input: {img_name}")
+
+# 4. Desplegar workflow.json en la biblioteca de ComfyUI (user/default/workflows/)
+comfy_wf_dir = os.path.join(comfy_root, "user", "default", "workflows")
+os.makedirs(comfy_wf_dir, exist_ok=True)
+repo_wf_path = os.path.join(workflow_dir, "workflow.json") if workflow_dir else os.path.join(base_dir, "workflows/commercial_product_video/workflow.json")
+if os.path.isfile(repo_wf_path):
+    dst_wf_path = os.path.join(comfy_wf_dir, "commercial_product_video.json")
+    shutil.copyfile(repo_wf_path, dst_wf_path)
+    print(f"   ✓ Workflow registrado en biblioteca de ComfyUI: {dst_wf_path}")
 PYEOF
 
 echo -e "\n${GREEN}✓ Nodos específicos instalados correctamente.${NC}"
