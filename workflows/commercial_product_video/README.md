@@ -1,99 +1,91 @@
-# 🎬 Workflow: Pipeline Publicitario de Lujo (Multi-Shot Ready)
+# 🎬 Workflow: Commercial Product Video (Full 4-Shot Pipeline)
 
-Pipeline profesional de publicidad para **productos de lujo, cosmética y perfumería** a partir de una foto de modelo y una foto de producto real.
+Pipeline profesional publicitario para **productos de lujo, perfumería y cosmética** a partir de una fotografía de una modelo y una fotografía real de un producto.
 
-Diseñado bajo una arquitectura **modular multi-shot**: en lugar de intentar forzar un anuncio completo en una sola generación, el sistema produce **tomas cinematográficas individuales de alta fidelidad (~5 segundos cada una)** listas para ensamblar en edición.
+El workflow contiene **físicamente implementados los 4 bloques de rodaje (Shots 1 al 4)**, cada uno con su propia integración fotográfica (Qwen Image Edit 2511), su dirección cinemática y diseño sonoro exclusivo (MiniMax H3), y su exportación independiente tanto de video MP4 como de fotografía publicitaria fija en 4K.
 
 ---
 
-## 🏗️ Arquitectura del Pipeline
+## 🏗️ Mapa de Rodaje Multi-Shot
 
 ```text
-[📸 Foto Modelo] ──┐
-                  ├──➔ [🧩 QWEN IMAGE EDIT 2511] ──┬──➔ [🖼️ Hero Shot Still (4K)]
-[📦 Foto Producto] ─┘              │               │
-                                   │               └──➔ [🎬 MINIMAX H3 (Shot 01)] ──➔ [💾 MP4 con Audio]
-[✍️ Hero Prompt] ──────────────────┤                                   │
-[🛡️ Reglas Preservación] ─────────┘               [✍️ Dirección Cinemática + Audio] ──┘
+[📸 Foto Modelo] ──┬──➔ [SHOT 1: Hero Model + Product] ──➔ Still 4K + MP4 (shot_01_hero)
+[📦 Foto Producto] ─┼──➔ [SHOT 2: Product Close-Up]     ──➔ Still 4K + MP4 (shot_02_product)
+                   ├──➔ [SHOT 3: Model Beauty Shot]    ──➔ Still 4K + MP4 (shot_03_beauty)
+                   └──➔ [SHOT 4: Final Packshot / CTA] ──➔ Still 4K + MP4 (shot_04_packshot)
 ```
 
 ---
 
-## 🧩 Nodos del Workflow
+## 📋 Estructura de los 4 Shots Implementados
 
-| ID | Nodo | Tipo | Función |
-| :--- | :--- | :--- | :--- |
-| **1** | `📸 1. Foto de la Modelo / Personaje` | `LoadImage` | Carga el rostro y cuerpo de la modelo de campaña. |
-| **2** | `📦 2. Foto Real del Producto` | `LoadImage` | Carga el producto real (frasco, packaging, joyería, etc.). |
-| **3** | `✍️ Prompt de Fusión Hero Shot` | `PrimitiveStringMultiline` | Instrucciones fotográficas de integración fotorrealista. |
-| **8** | `🛡️ Preservación de Producto e Identidad` | `PrimitiveStringMultiline` | Reglas negativas para evitar deformaciones y mantener fidelidad. |
-| **4** | `🧩 FASE 1: Fusión Modelo + Producto` | Subgrafo Qwen 2511 | Integra modelo y producto con iluminación y anatomía de estudio. |
-| **9** | `🖼️ Guardar Hero Shot` | `SaveImage` | Exporta la imagen fija en 4K (`commercial/shot_01_hero_still`). |
-| **5** | `✍️ Dirección Cinemática y Audio` | `PrimitiveStringMultiline` | Dirección de cámara continua (slow push-in) y pista sonora ambiental. |
-| **6** | `🎬 FASE 2: Animación Cinemática Shot 01` | Subgrafo MiniMax H3 | Genera el video continuo de 5 seg con audio estéreo sincronizado. |
-| **7** | `💾 Exportación: Shot 01 Hero` | `SaveVideo` | Renderiza el video master MP4 (`commercial/shot_01_hero`). |
-| **10** | `📌 Arquitectura Multi-Shot` | `MarkdownNote` | Guía en lienzo para duplicar y crear Shots 2, 3 y 4. |
-| **11** | `📐 Selector de Formato` | `MarkdownNote` | Parámetros para alternar entre 16:9 y 9:16. |
+### 🎬 SHOT 1 — HERO MODEL + PRODUCT (Presentación Principal)
+* **Objetivo:** La modelo sostiene el producto de forma elegante con un slow cinematic push-in.
+* **Fusión (Qwen 2511):** Nodo 4 (`qwen_image_edit_2511_bf16`)
+* **Imagen Fija 4K:** Nodo 9 ➔ `output/commercial/shot_01_hero_still`
+* **Animación (MiniMax H3):** Nodo 6 (Duración: 5.0 seg)
+* **Video Final:** Nodo 7 ➔ `output/commercial/shot_01_hero.mp4`
+* **Audio:** Deep warm sub-bass drone, ambiente de estudio de lujo, sutil barrido sincronizado con la cámara.
 
----
+### 🎬 SHOT 2 — PRODUCT CLOSE-UP / MACRO (Detalle y Reflejos)
+* **Objetivo:** Primerísimo plano macro del envase, destacando facetas de vidrio, relieve del logo y tapa metálica.
+* **Fusión (Qwen 2511):** Nodo 13
+* **Imagen Fija 4K:** Nodo 14 ➔ `output/commercial/shot_02_product_still`
+* **Animación (MiniMax H3):** Nodo 16 (Duración: 5.0 seg, slow orbit)
+* **Video Final:** Nodo 17 ➔ `output/commercial/shot_02_product.mp4`
+* **Audio:** Texturas cristalinas de alta frecuencia, sutil fricción sobre vidrio, micro-clicks elegantes.
 
-## 💎 Prompts Optimizados para Campaña de Lujo
+### 🎬 SHOT 3 — MODEL BEAUTY SHOT (Primer Plano Sensorial)
+* **Objetivo:** Plano medio cerrado de la modelo apreciando o presentando el producto cerca de su cuello/rostro.
+* **Fusión (Qwen 2511):** Nodo 19
+* **Imagen Fija 4K:** Nodo 20 ➔ `output/commercial/shot_03_beauty_still`
+* **Animación (MiniMax H3):** Nodo 22 (Duración: 5.0 seg, suave glide vertical)
+* **Video Final:** Nodo 23 ➔ `output/commercial/shot_03_beauty.mp4`
+* **Audio:** Drone sensual cálido, shimmer etéreo, roce suave de telas, sofisticado pulso contemporáneo.
 
-### 1. Fusión de Campaña (Nodo 3 — Qwen Image Edit)
-```text
-High-end commercial campaign photography for a luxury cosmetics and perfume brand. The elegant model from image 1 is gracefully holding the exact product from image 2 with natural, anatomical finger placement and delicate contact. Strict preservation of the model's exact facial identity, bone structure, eye gaze, skin tone, hair style, and physical proportions. The perfume or cosmetic product from image 2 is replicated with 100% fidelity: completely preserving the exact bottle shape, glass bevels, metallic cap, label typography, brand logo, and formulation color. Editorial studio lighting with soft diffused key light, dramatic rim light, and natural caustics reflecting through the glass bottle. Pristine skin texture with visible pores, shallow depth of field, 85mm luxury portraiture, ultra-sharp focus on the product, cinematic color grading, authentic commercial advertising photograph, no AI artifacts.
-```
-
-### 2. Preservación e Integridad (Nodo 8 — Reglas Negativas)
-```text
-deformed fingers, extra digits, missing fingers, malformed hands, distorted grip, unnatural finger bending, altered product shape, modified bottle geometry, warped cap, wrong logo, misspelled text, modified label, changed brand colors, low resolution, blurry details, cartoonish, oversaturated, plastic mannequin skin, CGI appearance, flat amateur lighting, inconsistent facial features, distorted face.
-```
-
-### 3. Dirección Cinemática y Audio (Nodo 5 — MiniMax H3: Shot 01)
-```text
-SHOT 1: Single continuous luxury commercial hero shot. The camera executes a slow, steady cinematic push-in towards the model holding the premium product. The model performs a minimal, graceful motion, subtly turning the product towards the lens with calm, confident elegance. The product remains perfectly rigid, stable, and photorealistic, preserving every detail of the glass bottle, metallic cap, and label. Soft studio rim highlights glide over the surface. Continuous single take, no scene cuts, no camera jumps, no morphing, cinematic 24fps motion blur, high-end perfume commercial.
-Audio: deep warm cinematic sub-bass drone, ultra-soft luxury studio air ambience, delicate crystal-clear glass resonance, subtle elegant whoosh synced with the slow camera push-in, pristine high-end sound design, modern sophisticated boutique aesthetic, pure ambient instrumentation without voices.
-```
+### 🎬 SHOT 4 — FINAL PACKSHOT / HERO CTA (Packshot sobre Pedestal)
+* **Objetivo:** El producto como protagonista absoluto sobre pedestal de mármol pulido con espacio superior limpio para logotipo y slogan.
+* **Fusión (Qwen 2511):** Nodo 25
+* **Imagen Fija 4K:** Nodo 26 ➔ `output/commercial/shot_04_packshot_still`
+* **Animación (MiniMax H3):** Nodo 28 (Duración: 5.0 seg, pedestal rise & tilt-up)
+* **Video Final:** Nodo 29 ➔ `output/commercial/shot_04_packshot.mp4`
+* **Audio:** Acorde de sub-bass resolutivo, crescendo con pad orquestal/sintetizador premium, glint sonoro final.
 
 ---
 
-## 📐 Selector de Formato (Horizontal vs Vertical)
+## 🛡️ Control Global de Preservación (Nodo 8)
 
-En el **Nodo 6 (MiniMax H3)**, ajusta los campos de resolución:
+Conectado simultáneamente a las 4 instancias de Qwen 2511 para garantizar:
+* Cero deformaciones en manos y dedos.
+* 100% de preservación de la forma de la botella, tapa, tipografía, logo y colores originales.
+* Fidelidad absoluta de la fisonomía, tono de piel y mirada de la modelo.
 
-* **📺 Horizontal 16:9 (YouTube, TV, Master Web):**
+---
+
+## 📐 Selector de Formato (Horizontal 16:9 vs Vertical 9:16)
+
+En cualquiera de los nodos MiniMax H3 (Nodos 6, 16, 22 y 28), puedes cambiar la resolución:
+
+* **📺 Formato Horizontal 16:9 (YouTube, TV, Master Web):**
   * `width`: `1280`
   * `height`: `720`
-* **📱 Vertical 9:16 (TikTok, Instagram Reels, YouTube Shorts):**
+* **📱 Formato Vertical 9:16 (TikTok, Instagram Reels, YouTube Shorts):**
   * `width`: `720`
   * `height`: `1280`
 
-*Nota:* Se mantiene la duración en **`5.0` segundos** para garantizar coherencia temporal y evitar artefactos de movimiento.
+---
+
+## ⚡ Cómo Ejecutar los Shots (Juntos o Individualmente)
+
+1. **Generar los 4 Shots juntos:**
+   * Haz clic en **Queue Prompt**. ComfyUI generará en secuencia los 4 Still Images y los 4 Videos MP4 con audio en la carpeta `output/commercial/`.
+2. **Generar un solo Shot (Ejemplo: Solo el Shot 1):**
+   * Si en algún momento solo quieres generar uno de los shots sin esperar los demás, selecciona los nodos del resto de los shots, haz clic derecho y selecciona **Mute** (o presiona `Ctrl+M`).
+   * Para reactivarlo, haz clic derecho y selecciona **Never** (desmutear).
 
 ---
 
-## 🎬 Cómo Expandir a Multi-Shot (Shot 2, 3 y 4)
-
-Para producir un comercial completo de 15 a 20 segundos sin sobrecargar la generación:
-
-1. **Shot 01 (Hero Shot):** Generado por defecto en este workflow ➔ `commercial/shot_01_hero.mp4`.
-2. **Shot 02 (Product Close-Up Macro):**
-   * Duplica los Nodos 5, 6 y 7 (`Ctrl+C` y `Ctrl+V`).
-   * Conecta la entrada `first_frame` de la nueva copia directamente a la foto del producto (**Nodo 2**).
-   * Cambia el prompt a una órbita macro sobre la botella y sus reflejos.
-   * Cambia el prefijo de salida a `commercial/shot_02_product`.
-3. **Shot 03 (Beauty Shot):**
-   * Duplica el bloque MiniMax conectando el resultado de una pose secundaria de la modelo.
-   * Cambia el prefijo de salida a `commercial/shot_03_beauty`.
-4. **Shot 04 (Packshot / CTA Final):**
-   * Plano estático sobre pedestal con destellos de luz e iluminación de catálogo.
-   * Cambia el prefijo de salida a `commercial/shot_04_packshot`.
-
-Al terminar las generaciones, solo importas los 4 archivos MP4 en tu editor de video (Premiere, DaVinci Resolve o CapCut) y ya tienes tu spot comercial con música y sonido sincronizado.
-
----
-
-## 🚀 Despliegue en RunPod
+## 🚀 Despliegue en 1-Click (RunPod RTX 5090)
 
 ```bash
 git clone https://github.com/kevoxky/Comfy.git && cd Comfy && bash workflows/commercial_product_video/bootstrap.sh

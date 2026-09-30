@@ -18,24 +18,7 @@ NC='\033[0m'
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$BASE_DIR"
 
-# 1. Opción de listar workflows disponibles (--list o -l)
-if [ "$1" == "--list" ] || [ "$1" == "-l" ] || [ "$1" == "help" ] || [ "$1" == "--help" ]; then
-    echo -e "${CYAN}================================================================${NC}"
-    echo -e "${GREEN}${BOLD}   LISTA DE WORKFLOWS DISPONIBLES EN ESTE REPOSITORIO           ${NC}"
-    echo -e "${CYAN}================================================================${NC}"
-    for w in workflows/*/; do
-        if [ -d "$w" ]; then
-            name=$(basename "$w")
-            echo -e "  • ${BOLD}${CYAN}${name}${NC}"
-            echo -e "    Comando directo: ${YELLOW}bash workflows/${name}/bootstrap.sh${NC}\n"
-        fi
-    done
-    echo -e "${GREEN}Para desplegar uno interactivamente: ${BOLD}bash bootstrap.sh${NC}"
-    echo -e "${CYAN}================================================================${NC}"
-    exit 0
-fi
-
-# 2. Determinar el workflow objetivo
+# 1. Determinar el workflow objetivo
 TARGET_INPUT="${1:-$WORKFLOW_DIR}"
 
 if [ -z "$TARGET_INPUT" ]; then

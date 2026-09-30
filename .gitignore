@@ -10,6 +10,8 @@
 output/
 temp/
 input/*.png
+!input/model_reference.png
+!input/product_reference.png
 !input/.gitkeep
 user/
 cache/
