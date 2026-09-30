@@ -1,79 +1,100 @@
-# 🎬 Workflow: Spot Publicitario Universal (Modelo + Producto)
+# 🎬 Workflow: Pipeline Publicitario de Lujo (Multi-Shot Ready)
 
-Este workflow profesional permite tomar la **foto de un modelo/personaje** y la **foto de cualquier producto** para generar un **video publicitario cinemático de alta gama** con **música ambiental y efectos de sonido de estudio integrados**.
+Pipeline profesional de publicidad para **productos de lujo, cosmética y perfumería** a partir de una foto de modelo y una foto de producto real.
 
----
-
-## ⚡ Requisitos en RunPod (RTX 5090)
-
-- **GPU:** NVIDIA RTX 5090 (32 GB VRAM)
-- **Container Disk (Disco efímero):** Asignar **80 GB - 100 GB** al crear el pod.
-- **Tiempo de descarga:** ~1 a 2 minutos gracias a la red de alta velocidad de RunPod y el script multihilo `aria2c`.
-- **Tiempo de renderizado:** ~30 a 50 segundos por video con el motor Turbo LoRA activado.
+Diseñado bajo una arquitectura **modular multi-shot**: en lugar de intentar forzar un anuncio completo en una sola generación, el sistema produce **tomas cinematográficas individuales de alta fidelidad (~5 segundos cada una)** listas para ensamblar en edición.
 
 ---
 
-## 🚀 Puesta en marcha en 1-Click (RunPod)
+## 🏗️ Arquitectura del Pipeline
 
-En la terminal web de RunPod (o vía SSH), ejecuta:
+```text
+[📸 Foto Modelo] ──┐
+                  ├──➔ [🧩 QWEN IMAGE EDIT 2511] ──┬──➔ [🖼️ Hero Shot Still (4K)]
+[📦 Foto Producto] ─┘              │               │
+                                   │               └──➔ [🎬 MINIMAX H3 (Shot 01)] ──➔ [💾 MP4 con Audio]
+[✍️ Hero Prompt] ──────────────────┤                                   │
+[🛡️ Reglas Preservación] ─────────┘               [✍️ Dirección Cinemática + Audio] ──┘
+```
+
+---
+
+## 🧩 Nodos del Workflow
+
+| ID | Nodo | Tipo | Función |
+| :--- | :--- | :--- | :--- |
+| **1** | `📸 1. Foto de la Modelo / Personaje` | `LoadImage` | Carga el rostro y cuerpo de la modelo de campaña. |
+| **2** | `📦 2. Foto Real del Producto` | `LoadImage` | Carga el producto real (frasco, packaging, joyería, etc.). |
+| **3** | `✍️ Prompt de Fusión Hero Shot` | `PrimitiveStringMultiline` | Instrucciones fotográficas de integración fotorrealista. |
+| **8** | `🛡️ Preservación de Producto e Identidad` | `PrimitiveStringMultiline` | Reglas negativas para evitar deformaciones y mantener fidelidad. |
+| **4** | `🧩 FASE 1: Fusión Modelo + Producto` | Subgrafo Qwen 2511 | Integra modelo y producto con iluminación y anatomía de estudio. |
+| **9** | `🖼️ Guardar Hero Shot` | `SaveImage` | Exporta la imagen fija en 4K (`commercial/shot_01_hero_still`). |
+| **5** | `✍️ Dirección Cinemática y Audio` | `PrimitiveStringMultiline` | Dirección de cámara continua (slow push-in) y pista sonora ambiental. |
+| **6** | `🎬 FASE 2: Animación Cinemática Shot 01` | Subgrafo MiniMax H3 | Genera el video continuo de 5 seg con audio estéreo sincronizado. |
+| **7** | `💾 Exportación: Shot 01 Hero` | `SaveVideo` | Renderiza el video master MP4 (`commercial/shot_01_hero`). |
+| **10** | `📌 Arquitectura Multi-Shot` | `MarkdownNote` | Guía en lienzo para duplicar y crear Shots 2, 3 y 4. |
+| **11** | `📐 Selector de Formato` | `MarkdownNote` | Parámetros para alternar entre 16:9 y 9:16. |
+
+---
+
+## 💎 Prompts Optimizados para Campaña de Lujo
+
+### 1. Fusión de Campaña (Nodo 3 — Qwen Image Edit)
+```text
+High-end commercial campaign photography for a luxury cosmetics and perfume brand. The elegant model from image 1 is gracefully holding the exact product from image 2 with natural, anatomical finger placement and delicate contact. Strict preservation of the model's exact facial identity, bone structure, eye gaze, skin tone, hair style, and physical proportions. The perfume or cosmetic product from image 2 is replicated with 100% fidelity: completely preserving the exact bottle shape, glass bevels, metallic cap, label typography, brand logo, and formulation color. Editorial studio lighting with soft diffused key light, dramatic rim light, and natural caustics reflecting through the glass bottle. Pristine skin texture with visible pores, shallow depth of field, 85mm luxury portraiture, ultra-sharp focus on the product, cinematic color grading, authentic commercial advertising photograph, no AI artifacts.
+```
+
+### 2. Preservación e Integridad (Nodo 8 — Reglas Negativas)
+```text
+deformed fingers, extra digits, missing fingers, malformed hands, distorted grip, unnatural finger bending, altered product shape, modified bottle geometry, warped cap, wrong logo, misspelled text, modified label, changed brand colors, low resolution, blurry details, cartoonish, oversaturated, plastic mannequin skin, CGI appearance, flat amateur lighting, inconsistent facial features, distorted face.
+```
+
+### 3. Dirección Cinemática y Audio (Nodo 5 — MiniMax H3: Shot 01)
+```text
+SHOT 1: Single continuous luxury commercial hero shot. The camera executes a slow, steady cinematic push-in towards the model holding the premium product. The model performs a minimal, graceful motion, subtly turning the product towards the lens with calm, confident elegance. The product remains perfectly rigid, stable, and photorealistic, preserving every detail of the glass bottle, metallic cap, and label. Soft studio rim highlights glide over the surface. Continuous single take, no scene cuts, no camera jumps, no morphing, cinematic 24fps motion blur, high-end perfume commercial.
+Audio: deep warm cinematic sub-bass drone, ultra-soft luxury studio air ambience, delicate crystal-clear glass resonance, subtle elegant whoosh synced with the slow camera push-in, pristine high-end sound design, modern sophisticated boutique aesthetic, pure ambient instrumentation without voices.
+```
+
+---
+
+## 📐 Selector de Formato (Horizontal vs Vertical)
+
+En el **Nodo 6 (MiniMax H3)**, ajusta los campos de resolución:
+
+* **📺 Horizontal 16:9 (YouTube, TV, Master Web):**
+  * `width`: `1280`
+  * `height`: `720`
+* **📱 Vertical 9:16 (TikTok, Instagram Reels, YouTube Shorts):**
+  * `width`: `720`
+  * `height`: `1280`
+
+*Nota:* Se mantiene la duración en **`5.0` segundos** para garantizar coherencia temporal y evitar artefactos de movimiento.
+
+---
+
+## 🎬 Cómo Expandir a Multi-Shot (Shot 2, 3 y 4)
+
+Para producir un comercial completo de 15 a 20 segundos sin sobrecargar la generación:
+
+1. **Shot 01 (Hero Shot):** Generado por defecto en este workflow ➔ `commercial/shot_01_hero.mp4`.
+2. **Shot 02 (Product Close-Up Macro):**
+   * Duplica los Nodos 5, 6 y 7 (`Ctrl+C` y `Ctrl+V`).
+   * Conecta la entrada `first_frame` de la nueva copia directamente a la foto del producto (**Nodo 2**).
+   * Cambia el prompt a una órbita macro sobre la botella y sus reflejos.
+   * Cambia el prefijo de salida a `commercial/shot_02_product`.
+3. **Shot 03 (Beauty Shot):**
+   * Duplica el bloque MiniMax conectando el resultado de una pose secundaria de la modelo.
+   * Cambia el prefijo de salida a `commercial/shot_03_beauty`.
+4. **Shot 04 (Packshot / CTA Final):**
+   * Plano estático sobre pedestal con destellos de luz e iluminación de catálogo.
+   * Cambia el prefijo de salida a `commercial/shot_04_packshot`.
+
+Al terminar las generaciones, solo importas los 4 archivos MP4 en tu editor de video (Premiere, DaVinci Resolve o CapCut) y ya tienes tu spot comercial con música y sonido sincronizado.
+
+---
+
+## 🚀 Despliegue en RunPod
 
 ```bash
-bash workflows/commercial_product_video/bootstrap.sh
+git clone https://github.com/kevoxky/Comfy.git && cd Comfy && bash workflows/commercial_product_video/bootstrap.sh
 ```
-
-El script se encargará automáticamente de:
-1. Actualizar ComfyUI a la última versión compatible.
-2. Descargar todos los modelos y pesajes necesarios (`MiniMax H3` unet, text encoder, VAEs de video y audio, y Turbo LoRA de 8 pasos).
-3. Instalar los custom nodes esenciales (`ComfyUI-Manager`, `ComfyUI-VideoHelperSuite`).
-
----
-
-## 🎨 Cómo usar el Workflow en ComfyUI
-
-1. Abre la interfaz web de ComfyUI en tu navegador.
-2. Arrastra el archivo [`workflow.json`](workflow.json) al lienzo de ComfyUI o cárgalo desde el menú **Load**.
-3. **Carga tus imágenes en los nodos de la izquierda:**
-   - **Nodo 1 (📸 Foto del Modelo):** Sube la foto del personaje o modelo.
-   - **Nodo 2 (📦 Foto del Producto):** Sube la foto del producto (de preferencia con buena iluminación o fondo recortado/transparente).
-4. **Ajusta el Prompt del Spot (Nodo central ✍️):**
-   Puedes usar una de las fórmulas universales que se muestran abajo.
-5. **Haz clic en `Queue Prompt`:**
-   El resultado final se guardará automáticamente en formato MP4 con su pista de audio estéreo en la carpeta `output/commercial/`.
-
----
-
-## 📝 Fórmulas de Prompts Universales para Comerciales
-
-El motor de video y audio entiende descripciones cinematográficas divididas en tomas de cámara y estilo sonoro. Aquí tienes 3 plantillas listas para copiar y pegar:
-
-### 💎 Plantilla A: Estudio de Lujo y Elegancia (Perfumes, Relojes, Joyería, Moda)
-```text
-Luxury commercial film. The model presents the product in a sleek dark studio void with subtle reflective ground and warm amber rim lighting.
-SHOT 1: The camera executes a slow, deliberate push-in towards the product as delicate highlights glisten along the contours and logo.
-SHOT 2: Gentle camera orbit, the model holds the product with elegance, warm soft flares reflecting across the surface.
-Audio: deep elegant cinematic bass pulse, soft glassy sweeps, delicate tactile mechanical clicks, and modern luxury electronic swell resolving smoothly.
-```
-
-### ⚡ Plantilla B: Tecnología y Gadgets (Auriculares, Periféricos, Electrónica)
-```text
-High-tech commercial film. The model interacts with the product in a futuristic dark room with neon cyan and magenta studio lighting.
-SHOT 1: Macro cinematic push-in focusing on the detailed textures, buttons, and metallic finish of the product.
-SHOT 2: Low-angle beauty orbit, the lights slowly pulse brighter, creating sharp neon streaks and crisp shadows.
-Audio: deep futuristic sub-bass room tone, sharp tactile clicks, sweeping electronic whoosh on camera moves, and a modern synth swell.
-```
-
-### 🌿 Plantilla C: Frescura, Belleza y Alimentos (Bebidas, Skincare, Cosmética Natural)
-```text
-Fresh commercial aesthetic film. The model holds the product in a bright, sun-drenched minimalist studio with soft morning light and natural shadows.
-SHOT 1: Clean camera push-in showing crisp condensation or natural textures on the product.
-SHOT 2: The model smiles gently as sunlight creates a golden lens flare across the frame.
-Audio: uplifting and airy ambient music, subtle crisp water droplets or bottle opening sound effect, smooth airy acoustic swell.
-```
-
----
-
-## ⚙️ Parámetros Recomendados
-
-- **Resolución:** `1280x720` (horizontal cinematográfico) o `720x1280` (vertical 9:16 para TikTok / Reels / Shorts). *Ambos deben ser múltiplos de 32.*
-- **Duración:** `5.0` segundos (estándar comercial rápido).
-- **Turbo Mode:** Activado por defecto (`turbo_mode: true`, `turbo_steps: 8`) para obtener resultados en menos de 1 minuto en la RTX 5090.

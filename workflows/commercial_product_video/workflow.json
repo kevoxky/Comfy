@@ -1,6 +1,6 @@
 {
-  "last_node_id": 7,
-  "last_link_id": 6,
+  "last_node_id": 11,
+  "last_link_id": 8,
   "nodes": [
     {
       "id": 1,
@@ -16,7 +16,7 @@
       "flags": {},
       "order": 0,
       "mode": 0,
-      "title": "📸 1. Foto del Modelo / Personaje",
+      "title": "📸 1. Foto de la Modelo / Personaje",
       "properties": {
         "Node name for S&R": "LoadImage"
       },
@@ -48,7 +48,7 @@
       "flags": {},
       "order": 1,
       "mode": 0,
-      "title": "📦 2. Foto del Producto",
+      "title": "📦 2. Foto Real del Producto",
       "properties": {
         "Node name for S&R": "LoadImage"
       },
@@ -74,13 +74,13 @@
         100
       ],
       "size": [
-        400,
-        180
+        440,
+        220
       ],
       "flags": {},
       "order": 2,
       "mode": 0,
-      "title": "✍️ Prompt de Fusión (Hero Shot)",
+      "title": "✍️ Prompt de Fusión Hero Shot (Qwen 2511)",
       "properties": {
         "Node name for S&R": "PrimitiveStringMultiline"
       },
@@ -94,7 +94,7 @@
         }
       ],
       "widgets_values": [
-        "High-end commercial photo. The model from image 1 is gracefully holding the product from image 2 in their hand, unified luxury studio lighting, soft rim highlights, natural finger grip contact, pristine product reflection and sharp details."
+        "High-end commercial campaign photography for a luxury cosmetics and perfume brand. The elegant model from image 1 is gracefully holding the exact product from image 2 with natural, anatomical finger placement and delicate contact. Strict preservation of the model's exact facial identity, bone structure, eye gaze, skin tone, hair style, and physical proportions. The perfume or cosmetic product from image 2 is replicated with 100% fidelity: completely preserving the exact bottle shape, glass bevels, metallic cap, label typography, brand logo, and formulation color. Editorial studio lighting with soft diffused key light, dramatic rim light, and natural caustics reflecting through the glass bottle. Pristine skin texture with visible pores, shallow depth of field, 85mm luxury portraiture, ultra-sharp focus on the product, cinematic color grading, authentic commercial advertising photograph, no AI artifacts."
       ]
     },
     {
@@ -102,11 +102,11 @@
       "type": "cdb2cf24-c432-439b-b5c8-5f69838580c9",
       "pos": [
         480,
-        340
+        580
       ],
       "size": [
         440,
-        540
+        560
       ],
       "flags": {},
       "order": 3,
@@ -136,7 +136,7 @@
         {
           "name": "prompt_1",
           "type": "STRING",
-          "link": null
+          "link": 7
         }
       ],
       "outputs": [
@@ -144,7 +144,8 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            4
+            4,
+            8
           ]
         }
       ],
@@ -152,7 +153,7 @@
         "Node name for S&R": "Image Edit (Qwen-Image 2511)"
       },
       "widgets_values": [
-        "Seamless commercial hero shot",
+        "Luxury commercial hero shot",
         "",
         "qwen_image_edit_2511_bf16.safetensors",
         "qwen_2.5_vl_7b_fp8_scaled.safetensors",
@@ -164,17 +165,17 @@
       "id": 5,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        980,
+        960,
         100
       ],
       "size": [
-        460,
-        220
+        500,
+        250
       ],
       "flags": {},
       "order": 4,
       "mode": 0,
-      "title": "✍️ Dirección Cinemática y Audio del Spot",
+      "title": "✍️ Dirección Cinemática y Audio (Shot 01: Hero Shot)",
       "properties": {
         "Node name for S&R": "PrimitiveStringMultiline"
       },
@@ -188,24 +189,24 @@
         }
       ],
       "widgets_values": [
-        "Luxury commercial commercial film. The model presents the product in a sleek studio environment with dramatic duotone rim lighting and soft reflections.\nSHOT 1: The camera executes a slow, deliberate push-in towards the product as warm highlights glisten on its surface.\nSHOT 2: Smooth orbit reveal, the model smiles subtly while turning the product slightly towards the lens.\nAudio: deep pulsing ambient cinematic sub-bass, elegant glassy sweeps, subtle tactile product click, and modern electronic swell."
+        "SHOT 1: Single continuous luxury commercial hero shot. The camera executes a slow, steady cinematic push-in towards the model holding the premium product. The model performs a minimal, graceful motion, subtly turning the product towards the lens with calm, confident elegance. The product remains perfectly rigid, stable, and photorealistic, preserving every detail of the glass bottle, metallic cap, and label. Soft studio rim highlights glide over the surface. Continuous single take, no scene cuts, no camera jumps, no morphing, cinematic 24fps motion blur, high-end perfume commercial.\nAudio: deep warm cinematic sub-bass drone, ultra-soft luxury studio air ambience, delicate crystal-clear glass resonance, subtle elegant whoosh synced with the slow camera push-in, pristine high-end sound design, modern sophisticated boutique aesthetic, pure ambient instrumentation without voices."
       ]
     },
     {
       "id": 6,
       "type": "4c314f31-ecda-4b08-ae98-faaba1bf613f",
       "pos": [
-        980,
+        960,
         380
       ],
       "size": [
-        480,
+        500,
         680
       ],
       "flags": {},
       "order": 5,
       "mode": 0,
-      "title": "🎬 FASE 2: Animación Cinemática con Audio (MiniMax H3)",
+      "title": "🎬 FASE 2: Animación Cinemática Shot 01 (MiniMax H3)",
       "inputs": [
         {
           "name": "first_frame",
@@ -251,7 +252,7 @@
         "Node name for S&R": "Image to Video (MiniMax H3)"
       },
       "widgets_values": [
-        "Editorial tech product commercial film.",
+        "Editorial luxury commercial hero shot.",
         1280,
         720,
         5.0,
@@ -266,7 +267,7 @@
         8
       ],
       "widgets_values_named": {
-        "prompt": "Editorial tech product commercial film.",
+        "prompt": "Editorial luxury commercial hero shot.",
         "width": 1280,
         "height": 720,
         "value_1": 5.0,
@@ -286,16 +287,16 @@
       "type": "SaveVideo",
       "pos": [
         1520,
-        380
+        100
       ],
       "size": [
-        400,
+        420,
         320
       ],
       "flags": {},
       "order": 6,
       "mode": 0,
-      "title": "💾 4. Spot Publicitario Final",
+      "title": "💾 Exportación: Shot 01 Hero (MP4 con Audio)",
       "inputs": [
         {
           "name": "video",
@@ -307,10 +308,129 @@
         "Node name for S&R": "SaveVideo"
       },
       "widgets_values": [
-        "commercial/spot_final",
+        "commercial/shot_01_hero",
         "auto",
         "auto"
       ]
+    },
+    {
+      "id": 8,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        480,
+        350
+      ],
+      "size": [
+        440,
+        190
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "title": "🛡️ Preservación de Producto e Identidad (Reglas Negativas)",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "widgets_values": [
+        "deformed fingers, extra digits, missing fingers, malformed hands, distorted grip, unnatural finger bending, altered product shape, modified bottle geometry, warped cap, wrong logo, misspelled text, modified label, changed brand colors, low resolution, blurry details, cartoonish, oversaturated, plastic mannequin skin, CGI appearance, flat amateur lighting, inconsistent facial features, distorted face."
+      ]
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        960,
+        660
+      ],
+      "size": [
+        400,
+        380
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "title": "🖼️ Guardar Hero Shot (Imagen Publicitaria 4K)",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "widgets_values": [
+        "commercial/shot_01_hero_still"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "MarkdownNote",
+      "pos": [
+        1520,
+        460
+      ],
+      "size": [
+        520,
+        360
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "title": "📌 Arquitectura Multi-Shot: Cómo crear Shot 2, 3 y 4",
+      "properties": {
+        "Node name for S&R": "MarkdownNote"
+      },
+      "inputs": [],
+      "outputs": [],
+      "widgets_values": [
+        "### 🎬 Arquitectura Multi-Shot: Plan de Rodaje\n\nEste pipeline genera tomas independientes de ~5 seg para editar en DaVinci/Premiere/CapCut:\n\n- **SHOT 1 — HERO MODEL + PRODUCT (Actual):**\n  Presentación principal. Modelo sosteniendo producto con slow push-in.\n  *Archivo:* commercial/shot_01_hero.mp4\n\n- **SHOT 2 — PRODUCT CLOSE-UP (Macro):**\n  Detalle del frasco y reflejos. Conecta el producto (Nodo 2) a una copia de MiniMax.\n  *Prompt:* Macro slow orbit around the luxury bottle, dramatic rim highlights gliding over the glass and logo.\n  *Archivo:* commercial/shot_02_product.mp4\n\n- **SHOT 3 — BEAUTY SHOT:**\n  Primer plano de la modelo apreciando o aplicando el producto con luz suave.\n  *Archivo:* commercial/shot_03_beauty.mp4\n\n- **SHOT 4 — PACKSHOT / FINAL CTA:**\n  Toma estática heroica sobre pedestal con destellos y atmósfera de lujo.\n  *Archivo:* commercial/shot_04_packshot.mp4\n\n*(Para duplicar un shot: selecciona Nodos 5, 6 y 7, copia con Ctrl+C y pega con Ctrl+V).*"
+      ],
+      "color": "#233",
+      "bgcolor": "#122"
+    },
+    {
+      "id": 11,
+      "type": "MarkdownNote",
+      "pos": [
+        1520,
+        850
+      ],
+      "size": [
+        520,
+        220
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "title": "📐 Selector de Formato: Horizontal (16:9) vs Vertical (9:16)",
+      "properties": {
+        "Node name for S&R": "MarkdownNote"
+      },
+      "inputs": [],
+      "outputs": [],
+      "widgets_values": [
+        "### 📐 Formatos Soportados en Nodo 6 (MiniMax H3)\n\nCambia los campos **width** y **height** según tu destino publicitario:\n\n- **📺 Horizontal 16:9 (TV, YouTube, Web):**\n  - **width:** 1280\n  - **height:** 720\n\n- **📱 Vertical 9:16 (TikTok, Instagram Reels, Shorts):**\n  - **width:** 720\n  - **height:** 1280\n\n*Duración:* Mantener en 5.0 segundos para óptima estabilidad temporal en RTX 5090."
+      ],
+      "color": "#332",
+      "bgcolor": "#221"
     }
   ],
   "links": [
@@ -361,6 +481,22 @@
       7,
       0,
       "VIDEO"
+    ],
+    [
+      7,
+      8,
+      0,
+      4,
+      4,
+      "STRING"
+    ],
+    [
+      8,
+      4,
+      0,
+      9,
+      0,
+      "IMAGE"
     ]
   ],
   "groups": [
