@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Paso 04: Descarga Acelerada de Modelos Declarados en configs/models.json
+# Paso 04: Descarga Acelerada de Modelos Declarados para el Workflow
 # ==============================================================================
 set -e
 
@@ -18,16 +18,22 @@ if [ -z "$COMFY_ROOT" ]; then
     COMFY_ROOT="/workspace/runpod-slim/ComfyUI"
 fi
 
-echo -e "${BLUE}=== [4/6] Descargando Modelos y Pesajes Declarados (aria2c 16-Hilos)... ===${NC}"
+echo -e "${BLUE}=== [4/6] Descargando Modelos para: ${WORKFLOW_NAME:-Workflow} (aria2c 16-Hilos)... ===${NC}"
 
 python3 - << 'PYEOF'
 import json, os, subprocess
 
-config_path = "configs/models.json"
+workflow_dir = os.environ.get("WORKFLOW_DIR", "")
+config_path = os.path.join(workflow_dir, "models.json") if workflow_dir else ""
+
+if not config_path or not os.path.exists(config_path):
+    config_path = "configs/models.json"
+
 if not os.path.exists(config_path):
-    print("⚠ No se encontró configs/models.json")
+    print(f"⚠ No se encontró archivo de modelos en {config_path}")
     exit(1)
 
+print(f"Leyendo catálogo de modelos desde: \033[1m{config_path}\033[0m")
 with open(config_path, "r", encoding="utf-8") as f:
     models = json.load(f)
 
@@ -69,12 +75,13 @@ for idx, m in enumerate(models, 1):
     print(f"   \033[0;32m✓ Descarga completada: {filename}\033[0m")
 PYEOF
 
-# Copiar el workflow oficial a la carpeta de workflows de ComfyUI
-WORKFLOW_SRC="workflows/commercial_product_video/workflow.json"
+# Copiar el workflow específico a ComfyUI
+WORKFLOW_SRC="$WORKFLOW_DIR/workflow.json"
 if [ -f "$WORKFLOW_SRC" ]; then
     mkdir -p "$COMFY_ROOT/user/default/workflows"
-    cp "$WORKFLOW_SRC" "$COMFY_ROOT/user/default/workflows/commercial_product_video.json" || true
-    echo -e "\n${GREEN}✓ Workflow integrado en: $COMFY_ROOT/user/default/workflows/commercial_product_video.json${NC}"
+    TARGET_JSON="$COMFY_ROOT/user/default/workflows/${WORKFLOW_NAME}.json"
+    cp "$WORKFLOW_SRC" "$TARGET_JSON" || true
+    echo -e "\n${GREEN}✓ Workflow integrado en: $TARGET_JSON${NC}"
 fi
 
-echo -e "\n${GREEN}✓ Todos los modelos han sido aprovisionados con éxito.${NC}"
+echo -e "\n${GREEN}✓ Todos los modelos de este workflow han sido aprovisionados.${NC}"

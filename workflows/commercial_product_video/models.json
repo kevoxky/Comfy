@@ -1,0 +1,90 @@
+[
+  {
+    "id": "qwen_image_edit_2511_diffusion",
+    "name": "Qwen Image Edit 2511 (Fusión Modelo + Producto)",
+    "filename": "qwen_image_edit_2511_bf16.safetensors",
+    "dest_dir": "models/diffusion_models",
+    "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+    "min_size_bytes": 104857600
+  },
+  {
+    "id": "qwen_2_5_vl_7b_text_encoder",
+    "name": "Qwen 2.5 VL 7B FP8 Scaled (Codificador de Texto)",
+    "filename": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+    "dest_dir": "models/text_encoders",
+    "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+    "min_size_bytes": 104857600
+  },
+  {
+    "id": "qwen_image_vae",
+    "name": "Qwen Image VAE",
+    "filename": "qwen_image_vae.safetensors",
+    "dest_dir": "models/vae",
+    "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/vae/qwen_image_vae.safetensors",
+    "min_size_bytes": 10485760
+  },
+  {
+    "id": "qwen_lightning_lora",
+    "name": "Qwen Image Edit 2511 Lightning 4-Steps LoRA",
+    "filename": "Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+    "dest_dir": "models/loras",
+    "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+    "min_size_bytes": 104857600
+  },
+  {
+    "id": "minimax_h3_diffusion",
+    "name": "MiniMax H3 FL2VA Pruned Int8 ConvRot (Video + Audio DiT)",
+    "filename": "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+    "dest_dir": "models/diffusion_models",
+    "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+    "min_size_bytes": 104857600
+  },
+  {
+    "id": "minimax_h3_text_encoder",
+    "name": "Qwen 3 VL 32B MiniMax H3 NVFP4 AWQ (Text Encoder)",
+    "filename": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+    "dest_dir": "models/text_encoders",
+    "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+    "min_size_bytes": 104857600
+  },
+  {
+    "id": "minimax_h3_video_vae",
+    "name": "MiniMax H3 Video VAE Int8 ConvRot",
+    "filename": "minimax_h3_video_vae_int8_convrot.safetensors",
+    "dest_dir": "models/vae",
+    "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_int8_convrot.safetensors",
+    "min_size_bytes": 10485760
+  },
+  {
+    "id": "minimax_h3_audio_vae",
+    "name": "MiniMax H3 Audio VAE FP32 (Audio Estéreo Cinemático)",
+    "filename": "minimax_h3_audio_vae_fp32.safetensors",
+    "dest_dir": "models/vae",
+    "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+    "min_size_bytes": 1048576
+  },
+  {
+    "id": "minimax_h3_turbo_lora",
+    "name": "MiniMax H3 Turbo 8-Step LoRA (Aceleración de Video)",
+    "filename": "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
+    "dest_dir": "models/loras",
+    "url": "https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
+    "min_size_bytes": 10485760
+  },
+  {
+    "id": "demo_model_reference",
+    "name": "Imagen Demo: Referencia Modelo / Personaje",
+    "filename": "model_reference.png",
+    "dest_dir": "input",
+    "url": "https://raw.githubusercontent.com/Comfy-Org/workflow_templates/refs/heads/main/input/portrait_model_denim.png",
+    "min_size_bytes": 10240
+  },
+  {
+    "id": "demo_product_reference",
+    "name": "Imagen Demo: Referencia Producto",
+    "filename": "product_reference.png",
+    "dest_dir": "input",
+    "url": "https://raw.githubusercontent.com/Comfy-Org/workflow_templates/refs/heads/main/input/transparent_rgb_gaming_mouse.png",
+    "min_size_bytes": 10240
+  }
+]

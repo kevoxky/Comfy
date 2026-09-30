@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Paso 03: Instalación de Custom Nodes Declarados en configs/custom_nodes.json
+# Paso 03: Instalación de Custom Nodes Específicos del Workflow
 # ==============================================================================
 set -e
 
@@ -20,16 +20,22 @@ fi
 CUSTOM_NODES_DIR="$COMFY_ROOT/custom_nodes"
 mkdir -p "$CUSTOM_NODES_DIR"
 
-echo -e "${BLUE}=== [3/6] Instalando Nodos Personalizados Declarados... ===${NC}"
+echo -e "${BLUE}=== [3/6] Instalando Nodos Declarados para: ${WORKFLOW_NAME:-Workflow}... ===${NC}"
 
 python3 - << 'PYEOF'
 import json, os, subprocess
 
-config_path = "configs/custom_nodes.json"
+workflow_dir = os.environ.get("WORKFLOW_DIR", "")
+config_path = os.path.join(workflow_dir, "custom_nodes.json") if workflow_dir else ""
+
+if not config_path or not os.path.exists(config_path):
+    config_path = "configs/custom_nodes.json"
+
 if not os.path.exists(config_path):
-    print("⚠ No se encontró configs/custom_nodes.json")
+    print(f"ℹ No se encontró archivo de nodos en {config_path}. Se omite.")
     exit(0)
 
+print(f"Leyendo nodos desde: \033[1m{config_path}\033[0m")
 with open(config_path, "r", encoding="utf-8") as f:
     nodes = json.load(f)
 
@@ -57,4 +63,4 @@ for node in nodes:
     print(f"   ✓ {name} listo.")
 PYEOF
 
-echo -e "\n${GREEN}✓ Todos los Custom Nodes declarados han sido instalados.${NC}"
+echo -e "\n${GREEN}✓ Nodos específicos instalados correctamente.${NC}"

@@ -38,10 +38,10 @@ else
 fi
 
 echo -e "\n${GREEN}${BOLD}================================================================${NC}"
-echo -e "${GREEN}${BOLD}   ¡DESPLIEGUE FINALIZADO CON ÉXITO!                            ${NC}"
+echo -e "${GREEN}${BOLD}   ¡DESPLIEGUE DE ${WORKFLOW_NAME:-WORKFLOW} FINALIZADO CON ÉXITO!   ${NC}"
 echo -e "${GREEN}${BOLD}================================================================${NC}"
 echo -e "1. Ve a tu panel de RunPod y haz clic en: ${CYAN}${BOLD}Connect -> Connect to Web UI (Port 8188)${NC}"
-echo -e "2. En ComfyUI, abre: ${YELLOW}workflows/commercial_product_video/workflow.json${NC}"
-echo -e "3. Sube la foto de tu modelo/personaje (Nodo 1) y tu producto (Nodo 2)."
-echo -e "4. Presiona ${GREEN}${BOLD}'Queue Prompt'${NC} para generar tu video comercial publicitario."
+echo -e "2. En ComfyUI, abre o arrastra: ${YELLOW}${WORKFLOW_DIR}/workflow.json${NC}"
+echo -e "3. Los nodos y modelos requeridos para este flujo ya están listos en la GPU."
+echo -e "4. Presiona ${GREEN}${BOLD}'Queue Prompt'${NC} para ejecutar tu flujo de trabajo."
 echo -e "${GREEN}${BOLD}================================================================${NC}\n"

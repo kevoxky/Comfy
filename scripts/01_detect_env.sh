@@ -50,7 +50,6 @@ for p in "${POSSIBLE_PATHS[@]}"; do
 done
 
 if [ -z "$COMFY_DIR" ]; then
-    # Por defecto en RunPod estándar
     if [ -d "/workspace/runpod-slim" ]; then
         COMFY_DIR="/workspace/runpod-slim/ComfyUI"
     elif [ -d "/workspace" ]; then
@@ -63,7 +62,29 @@ else
     echo -e "${GREEN}✓ ComfyUI localizado en:${NC} $COMFY_DIR"
 fi
 
-# Guardar variable persistente para los siguientes pasos
-echo "export COMFY_ROOT=\"$COMFY_DIR\"" > .env.runtime
+# Resolver WORKFLOW_DIR específico
+TARGET_WORKFLOW="${1:-$WORKFLOW_DIR}"
+if [ -z "$TARGET_WORKFLOW" ]; then
+    TARGET_WORKFLOW="workflows/commercial_product_video"
+fi
+
+# Si pasaron solo el nombre del workflow sin prefijo
+if [ ! -d "$TARGET_WORKFLOW" ] && [ -d "workflows/$TARGET_WORKFLOW" ]; then
+    TARGET_WORKFLOW="workflows/$TARGET_WORKFLOW"
+fi
+
+# Convertir a ruta absoluta
+TARGET_WORKFLOW_ABS="$(cd "$TARGET_WORKFLOW" 2>/dev/null && pwd || echo "$TARGET_WORKFLOW")"
+WORKFLOW_NAME="$(basename "$TARGET_WORKFLOW_ABS")"
+
+echo -e "${GREEN}✓ Workflow Objetivo Seleccionado:${NC} $WORKFLOW_NAME"
+echo -e "   Directorio: $TARGET_WORKFLOW_ABS"
+
+# Guardar variables persistentes para los siguientes pasos
+cat << EOF > .env.runtime
+export COMFY_ROOT="$COMFY_DIR"
+export WORKFLOW_DIR="$TARGET_WORKFLOW_ABS"
+export WORKFLOW_NAME="$WORKFLOW_NAME"
+EOF
 chmod +x .env.runtime
-echo -e "${GREEN}✓ Entorno de ejecución registrado en .env.runtime${NC}"
+echo -e "${GREEN}✓ Entorno registrado en .env.runtime${NC}"
