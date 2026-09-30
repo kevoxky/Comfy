@@ -8,5 +8,10 @@
     "name": "ComfyUI-VideoHelperSuite",
     "git_url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git",
     "description": "Nodos para combinar video y audio estéreo sincronizado, exportación MP4"
+  },
+  {
+    "name": "ComfyUI-Commercial-Director",
+    "git_url": "local",
+    "description": "Director Creativo IA y Ensamblador Automático de Videos Comerciales Multi-Shot"
   }
 ]

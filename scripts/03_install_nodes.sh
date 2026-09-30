@@ -45,6 +45,8 @@ custom_nodes_dir = os.path.join(comfy_root, "custom_nodes")
 for node in nodes:
     name = node.get("name")
     git_url = node.get("git_url")
+    if not git_url or git_url == "local":
+        continue
     target_path = os.path.join(custom_nodes_dir, name)
 
     print(f"\n📦 Procesando Nodo: \033[1m{name}\033[0m")
@@ -61,6 +63,21 @@ for node in nodes:
         subprocess.run(["pip", "install", "--no-cache-dir", "-r", req_file, "-q"], check=False)
 
     print(f"   ✓ {name} listo.")
+
+# 2. Desplegar nodos personalizados locales incluidos en este repositorio
+import shutil
+base_dir = os.environ.get("BASE_DIR", ".")
+local_nodes_dir = os.path.join(base_dir, "custom_nodes")
+if os.path.isdir(local_nodes_dir):
+    for item in os.listdir(local_nodes_dir):
+        src_item = os.path.join(local_nodes_dir, item)
+        dst_item = os.path.join(custom_nodes_dir, item)
+        if os.path.isdir(src_item):
+            print(f"\n📦 Desplegando nodo personalizado local: \033[1m{item}\033[0m")
+            if os.path.exists(dst_item):
+                shutil.rmtree(dst_item)
+            shutil.copytree(src_item, dst_item)
+            print(f"   ✓ {item} sincronizado con éxito.")
 PYEOF
 
 echo -e "\n${GREEN}✓ Nodos específicos instalados correctamente.${NC}"

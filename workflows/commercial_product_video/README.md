@@ -1,92 +1,105 @@
-# 🎬 Workflow: Commercial Product Video (Full 4-Shot Pipeline)
+# 🎬 Workflow: Commercial Product Video (AI Director & Automated Assembly)
 
-Pipeline profesional publicitario para **productos de lujo, perfumería y cosmética** a partir de una fotografía de una modelo y una fotografía real de un producto.
-
-El workflow contiene **físicamente implementados los 4 bloques de rodaje (Shots 1 al 4)**, cada uno con su propia integración fotográfica (Qwen Image Edit 2511), su dirección cinemática y diseño sonoro exclusivo (MiniMax H3), y su exportación independiente tanto de video MP4 como de fotografía publicitaria fija en 4K.
+Pipeline profesional integral para la producción de **anuncios comerciales cinematográficos de lujo, perfumería y cosmética**, potenciado por un **Director Creativo IA** y un **Sistema de Montaje y Ensamblado Automático Final**.
 
 ---
 
-## 🏗️ Mapa de Rodaje Multi-Shot
+## 🌟 Arquitectura Conceptual Completa
 
 ```text
-[📸 Foto Modelo] ──┬──➔ [SHOT 1: Hero Model + Product] ──➔ Still 4K + MP4 (shot_01_hero)
-[📦 Foto Producto] ─┼──➔ [SHOT 2: Product Close-Up]     ──➔ Still 4K + MP4 (shot_02_product)
-                   ├──➔ [SHOT 3: Model Beauty Shot]    ──➔ Still 4K + MP4 (shot_03_beauty)
-                   └──➔ [SHOT 4: Final Packshot / CTA] ──➔ Still 4K + MP4 (shot_04_packshot)
+               💡 [IDEA GENERAL DEL ANUNCIO]
+                           │
+                           ▼
+             🎬 [DIRECTOR CREATIVO IA (Nodo 33)]
+             ├── Plan de Rodaje & Dirección Artística (JSON)
+             ├── Selector Dinámico de Formato (16:9 / 9:16)
+             └── Generador de los 8 Prompts Técnicos
+                           │
+       ┌───────────────────┼───────────────────┬───────────────────┐
+       ▼                   ▼                   ▼                   ▼
+┌───────────────┐   ┌───────────────┐   ┌───────────────┐   ┌───────────────┐
+│ 🎬 SHOT 1     │   │ 🎬 SHOT 2     │   │ 🎬 SHOT 3     │   │ 🎬 SHOT 4     │
+│ Hero Present. │   │ Product Macro │   │ Model Beauty  │   │ Final Packshot│
+│               │   │               │   │               │   │               │
+│ Qwen 2511     │   │ Qwen 2511     │   │ Qwen 2511     │   │ Qwen 2511     │
+│       ↓       │   │       ↓       │   │       ↓       │   │       ↓       │
+│ MiniMax H3    │   │ MiniMax H3    │   │ MiniMax H3    │   │ MiniMax H3    │
+│       ↓       │   │       ↓       │   │       ↓       │   │       ↓       │
+│ Shot 1 Video  │   │ Shot 2 Video  │   │ Shot 3 Video  │   │ Shot 4 Video  │
+└───────┬───────┘   └───────┬───────┘   └───────┬───────┘   └───────┬───────┘
+        │                   │                   │                   │
+        └───────────────────┼───────────────────┴───────────────────┘
+                            ▼
+              🎞️ [VIDEO ASSEMBLER (Nodo 35)]
+              - Concatenación de clips 1 ➔ 2 ➔ 3 ➔ 4
+              - Muxing de pistas de audio estéreo
+              - Copia de flujo sin pérdida (-c copy)
+                            │
+                            ▼
+              🏆 [FINAL COMMERCIAL (Nodo 36)]
+              output/commercial/final_commercial.mp4
 ```
 
 ---
 
-## 📋 Estructura de los 4 Shots Implementados
+## 🧠 FASE 1: Director Creativo IA (Nodos 30 a 34)
 
-### 🎬 SHOT 1 — HERO MODEL + PRODUCT (Presentación Principal)
-* **Objetivo:** La modelo sostiene el producto de forma elegante con un slow cinematic push-in.
-* **Fusión (Qwen 2511):** Nodo 4 (`qwen_image_edit_2511_bf16`)
-* **Imagen Fija 4K:** Nodo 9 ➔ `output/commercial/shot_01_hero_still`
-* **Animación (MiniMax H3):** Nodo 6 (Duración: 5.0 seg)
-* **Video Final:** Nodo 7 ➔ `output/commercial/shot_01_hero.mp4`
-* **Audio:** Deep warm sub-bass drone, ambiente de estudio de lujo, sutil barrido sincronizado con la cámara.
+El usuario no necesita redactar manualmente prompts complejos ni copiar y pegar textos.
 
-### 🎬 SHOT 2 — PRODUCT CLOSE-UP / MACRO (Detalle y Reflejos)
-* **Objetivo:** Primerísimo plano macro del envase, destacando facetas de vidrio, relieve del logo y tapa metálica.
-* **Fusión (Qwen 2511):** Nodo 13
-* **Imagen Fija 4K:** Nodo 14 ➔ `output/commercial/shot_02_product_still`
-* **Animación (MiniMax H3):** Nodo 16 (Duración: 5.0 seg, slow orbit)
-* **Video Final:** Nodo 17 ➔ `output/commercial/shot_02_product.mp4`
-* **Audio:** Texturas cristalinas de alta frecuencia, sutil fricción sobre vidrio, micro-clicks elegantes.
+### Controles Principales al Inicio del Workflow:
+1. **💡 Idea General del Anuncio (Nodo 30):**
+   * Describe en lenguaje natural lo que deseas para la campaña.
+   * *Ejemplo:* `"Quiero un anuncio de lujo para este perfume. La modelo está en un ambiente nocturno elegante, transmite sensualidad y sofisticación. El producto debe sentirse exclusivo y premium."`
+2. **🎨 Estilo Visual (Nodo 33):**
+   * Presets disponibles: `Luxury & Exclusive`, `Beauty & Cosmetics`, `Cinematic & Moody`, `High-Tech Minimalist`, `Fresh & Vibrant`.
+3. **📐 Selector de Formato (16:9 vs 9:16):**
+   * Conmuta dinámicamente entre horizontal (`1280x720`) y vertical (`720x1280`).
+   * **Se propaga automáticamente a los 4 MiniMax H3** sin alterar manualmente cada nodo.
+4. **⏱️ Duración por Shot:**
+   * Ajustable globalmente (5.0 segundos por defecto, para un comercial completo de 20 segundos).
 
-### 🎬 SHOT 3 — MODEL BEAUTY SHOT (Primer Plano Sensorial)
-* **Objetivo:** Plano medio cerrado de la modelo apreciando o presentando el producto cerca de su cuello/rostro.
-* **Fusión (Qwen 2511):** Nodo 19
-* **Imagen Fija 4K:** Nodo 20 ➔ `output/commercial/shot_03_beauty_still`
-* **Animación (MiniMax H3):** Nodo 22 (Duración: 5.0 seg, suave glide vertical)
-* **Video Final:** Nodo 23 ➔ `output/commercial/shot_03_beauty.mp4`
-* **Audio:** Drone sensual cálido, shimmer etéreo, roce suave de telas, sofisticado pulso contemporáneo.
-
-### 🎬 SHOT 4 — FINAL PACKSHOT / HERO CTA (Packshot sobre Pedestal)
-* **Objetivo:** El producto como protagonista absoluto sobre pedestal de mármol pulido con espacio superior limpio para logotipo y slogan.
-* **Fusión (Qwen 2511):** Nodo 25
-* **Imagen Fija 4K:** Nodo 26 ➔ `output/commercial/shot_04_packshot_still`
-* **Animación (MiniMax H3):** Nodo 28 (Duración: 5.0 seg, pedestal rise & tilt-up)
-* **Video Final:** Nodo 29 ➔ `output/commercial/shot_04_packshot.mp4`
-* **Audio:** Acorde de sub-bass resolutivo, crescendo con pad orquestal/sintetizador premium, glint sonoro final.
+### Salida Conectada de 8 Prompts:
+El Director IA produce y conecta directamente los cables hacia:
+* `shot_01_image_prompt` ➔ Qwen Shot 1 (Fusión Modelo + Producto)
+* `shot_01_video_prompt` ➔ MiniMax Shot 1 (Movimiento de cámara y diseño de audio)
+* `shot_02_image_prompt` ➔ Qwen Shot 2 (Composición Macro)
+* `shot_02_video_prompt` ➔ MiniMax Shot 2 (Órbita cinemática y audio cristalino)
+* `shot_03_image_prompt` ➔ Qwen Shot 3 (Beauty Shot)
+* `shot_03_video_prompt` ➔ MiniMax Shot 3 (Glide íntimo y pulso atmosférico)
+* `shot_04_image_prompt` ➔ Qwen Shot 4 (Packshot Final con espacio para CTA)
+* `shot_04_video_prompt` ➔ MiniMax Shot 4 (Ascenso de pedestal y acorde de cierre)
 
 ---
 
-## 🛡️ Control Global de Preservación (Nodo 8)
+## 🎬 FASE 2: Arquitectura de Rodaje (Shots 1 al 4)
 
-Conectado simultáneamente a las 4 instancias de Qwen 2511 para garantizar:
-* Cero deformaciones en manos y dedos.
-* 100% de preservación de la forma de la botella, tapa, tipografía, logo y colores originales.
-* Fidelidad absoluta de la fisonomía, tono de piel y mirada de la modelo.
-
----
-
-## 📐 Selector de Formato (Horizontal 16:9 vs Vertical 9:16)
-
-En cualquiera de los nodos MiniMax H3 (Nodos 6, 16, 22 y 28), puedes cambiar la resolución:
-
-* **📺 Formato Horizontal 16:9 (YouTube, TV, Master Web):**
-  * `width`: `1280`
-  * `height`: `720`
-* **📱 Formato Vertical 9:16 (TikTok, Instagram Reels, YouTube Shorts):**
-  * `width`: `720`
-  * `height`: `1280`
+Cada shot se ejecuta de forma física e independiente:
+* **SHOT 1 (Hero Model + Product):** Nodo 4 (Qwen) ➔ Nodo 6 (MiniMax) ➔ Nodo 7 (`shot_01_hero.mp4`) + Nodo 9 (Still 4K).
+* **SHOT 2 (Product Close-Up / Macro):** Nodo 13 (Qwen) ➔ Nodo 16 (MiniMax) ➔ Nodo 17 (`shot_02_product.mp4`) + Nodo 14 (Still 4K).
+* **SHOT 3 (Model Beauty Shot):** Nodo 19 (Qwen) ➔ Nodo 22 (MiniMax) ➔ Nodo 23 (`shot_03_beauty.mp4`) + Nodo 20 (Still 4K).
+* **SHOT 4 (Final Packshot / CTA):** Nodo 25 (Qwen) ➔ Nodo 28 (MiniMax) ➔ Nodo 29 (`shot_04_packshot.mp4`) + Nodo 26 (Still 4K).
 
 ---
 
-## ⚡ Cómo Ejecutar los Shots (Juntos o Individualmente)
+## 🎞️ FASE 3: Montaje y Ensamblado Automático (Nodos 35 y 36)
 
-1. **Generar los 4 Shots juntos:**
-   * Haz clic en **Queue Prompt**. ComfyUI generará en secuencia los 4 Still Images y los 4 Videos MP4 con audio en la carpeta `output/commercial/`.
-2. **Generar un solo Shot (Ejemplo: Solo el Shot 1):**
-   * Si en algún momento solo quieres generar uno de los shots sin esperar los demás, selecciona los nodos del resto de los shots, haz clic derecho y selecciona **Mute** (o presiona `Ctrl+M`).
-   * Para reactivarlo, haz clic derecho y selecciona **Never** (desmutear).
+Una vez generados los 4 clips individuales:
+1. **Ensamblado Secuencial (Nodo 35):**
+   * Concatena en orden estricto: `SHOT 1` ➔ `SHOT 2` ➔ `SHOT 3` ➔ `SHOT 4`.
+   * Preserva resolución, tasa de cuadros (24 FPS) y calidad original sin recodificación innecesaria gracias a FFmpeg stream copy (`-c copy`).
+2. **Audio Master Sincronizado:**
+   * Mantiene el audio estéreo individual generado por cada MiniMax en perfecta sincronía temporal.
+   * Dispone del socket opcional `optional_master_soundtrack` para conectar una pista musical integral en el futuro.
+3. **Exportación Final (Nodo 36):**
+   * Genera el master publicitario definitivo en:
+     `output/commercial/final_commercial.mp4`
 
 ---
 
-## 🚀 Despliegue en 1-Click (RunPod RTX 5090)
+## 🚀 Despliegue Automatizado en RunPod (RTX 5090)
 
 ```bash
 git clone https://github.com/kevoxky/Comfy.git && cd Comfy && bash workflows/commercial_product_video/bootstrap.sh
 ```
+
+El bootstrap detectará el hardware, instalará ComfyUI y las dependencias (FFmpeg, PyAV, VideoHelperSuite), aprovisionará los modelos de difusión y codificadores de texto, y desplegará automáticamente la extensión local `ComfyUI-Commercial-Director`.

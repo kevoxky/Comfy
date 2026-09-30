@@ -94,9 +94,7 @@
         {
           "name": "STRING",
           "type": "STRING",
-          "links": [
-            3
-          ]
+          "links": []
         }
       ],
       "widgets_values": [
@@ -137,7 +135,7 @@
         {
           "name": "prompt",
           "type": "STRING",
-          "link": 3
+          "link": 35
         },
         {
           "name": "prompt_1",
@@ -189,9 +187,7 @@
         {
           "name": "STRING",
           "type": "STRING",
-          "links": [
-            5
-          ]
+          "links": []
         }
       ],
       "widgets_values": [
@@ -227,22 +223,22 @@
         {
           "name": "width",
           "type": "INT",
-          "link": null
+          "link": 43
         },
         {
           "name": "height",
           "type": "INT",
-          "link": null
+          "link": 47
         },
         {
           "name": "value_1",
           "type": "FLOAT",
-          "link": null
+          "link": 51
         },
         {
           "name": "prompt",
           "type": "STRING",
-          "link": 5
+          "link": 36
         }
       ],
       "outputs": [
@@ -250,7 +246,8 @@
           "name": "VIDEO",
           "type": "VIDEO",
           "links": [
-            6
+            6,
+            55
           ]
         }
       ],
@@ -463,9 +460,7 @@
         {
           "name": "STRING",
           "type": "STRING",
-          "links": [
-            11
-          ]
+          "links": []
         }
       ],
       "widgets_values": [
@@ -506,7 +501,7 @@
         {
           "name": "prompt",
           "type": "STRING",
-          "link": 11
+          "link": 37
         },
         {
           "name": "prompt_1",
@@ -594,9 +589,7 @@
         {
           "name": "STRING",
           "type": "STRING",
-          "links": [
-            15
-          ]
+          "links": []
         }
       ],
       "widgets_values": [
@@ -632,22 +625,22 @@
         {
           "name": "width",
           "type": "INT",
-          "link": null
+          "link": 44
         },
         {
           "name": "height",
           "type": "INT",
-          "link": null
+          "link": 48
         },
         {
           "name": "value_1",
           "type": "FLOAT",
-          "link": null
+          "link": 52
         },
         {
           "name": "prompt",
           "type": "STRING",
-          "link": 15
+          "link": 38
         }
       ],
       "outputs": [
@@ -655,7 +648,8 @@
           "name": "VIDEO",
           "type": "VIDEO",
           "links": [
-            16
+            16,
+            56
           ]
         }
       ],
@@ -747,9 +741,7 @@
         {
           "name": "STRING",
           "type": "STRING",
-          "links": [
-            19
-          ]
+          "links": []
         }
       ],
       "widgets_values": [
@@ -790,7 +782,7 @@
         {
           "name": "prompt",
           "type": "STRING",
-          "link": 19
+          "link": 39
         },
         {
           "name": "prompt_1",
@@ -878,9 +870,7 @@
         {
           "name": "STRING",
           "type": "STRING",
-          "links": [
-            23
-          ]
+          "links": []
         }
       ],
       "widgets_values": [
@@ -916,22 +906,22 @@
         {
           "name": "width",
           "type": "INT",
-          "link": null
+          "link": 45
         },
         {
           "name": "height",
           "type": "INT",
-          "link": null
+          "link": 49
         },
         {
           "name": "value_1",
           "type": "FLOAT",
-          "link": null
+          "link": 53
         },
         {
           "name": "prompt",
           "type": "STRING",
-          "link": 23
+          "link": 40
         }
       ],
       "outputs": [
@@ -939,7 +929,8 @@
           "name": "VIDEO",
           "type": "VIDEO",
           "links": [
-            24
+            24,
+            57
           ]
         }
       ],
@@ -1031,9 +1022,7 @@
         {
           "name": "STRING",
           "type": "STRING",
-          "links": [
-            27
-          ]
+          "links": []
         }
       ],
       "widgets_values": [
@@ -1074,7 +1063,7 @@
         {
           "name": "prompt",
           "type": "STRING",
-          "link": 27
+          "link": 41
         },
         {
           "name": "prompt_1",
@@ -1162,9 +1151,7 @@
         {
           "name": "STRING",
           "type": "STRING",
-          "links": [
-            31
-          ]
+          "links": []
         }
       ],
       "widgets_values": [
@@ -1200,22 +1187,22 @@
         {
           "name": "width",
           "type": "INT",
-          "link": null
+          "link": 46
         },
         {
           "name": "height",
           "type": "INT",
-          "link": null
+          "link": 50
         },
         {
           "name": "value_1",
           "type": "FLOAT",
-          "link": null
+          "link": 54
         },
         {
           "name": "prompt",
           "type": "STRING",
-          "link": 31
+          "link": 42
         }
       ],
       "outputs": [
@@ -1223,7 +1210,8 @@
           "name": "VIDEO",
           "type": "VIDEO",
           "links": [
-            32
+            32,
+            58
           ]
         }
       ],
@@ -1292,6 +1280,424 @@
         "auto",
         "auto"
       ]
+    },
+    {
+      "id": 30,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        120,
+        -580
+      ],
+      "size": [
+        400,
+        260
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            33
+          ],
+          "localized_name": "STRING"
+        }
+      ],
+      "title": "💡 1. IDEA GENERAL DEL ANUNCIO (Escribe aquí tu visión)",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Quiero un anuncio de lujo para este perfume. La modelo está en un ambiente nocturno elegante, transmite sensualidad y sofisticación. El producto debe sentirse exclusivo y premium."
+      ],
+      "color": "#1b4965",
+      "bgcolor": "#132d42"
+    },
+    {
+      "id": 32,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        120,
+        -280
+      ],
+      "size": [
+        400,
+        240
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            34
+          ],
+          "localized_name": "STRING"
+        }
+      ],
+      "title": "🧠 2. Entrada LLM / JSON Externo (Opcional)",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#3d2645",
+      "bgcolor": "#27172e"
+    },
+    {
+      "id": 33,
+      "type": "CommercialCreativeDirector",
+      "pos": [
+        560,
+        -580
+      ],
+      "size": [
+        460,
+        540
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "idea",
+          "type": "STRING",
+          "link": 33,
+          "localized_name": "idea",
+          "widget": {
+            "name": "idea"
+          }
+        },
+        {
+          "name": "style",
+          "type": "STRING",
+          "link": null,
+          "localized_name": "style",
+          "widget": {
+            "name": "style"
+          }
+        },
+        {
+          "name": "aspect_ratio",
+          "type": "STRING",
+          "link": null,
+          "localized_name": "aspect_ratio",
+          "widget": {
+            "name": "aspect_ratio"
+          }
+        },
+        {
+          "name": "duration_seconds",
+          "type": "FLOAT",
+          "link": null,
+          "localized_name": "duration_seconds",
+          "widget": {
+            "name": "duration_seconds"
+          }
+        },
+        {
+          "name": "optional_llm_json",
+          "type": "STRING",
+          "link": 34,
+          "localized_name": "optional_llm_json",
+          "widget": {
+            "name": "optional_llm_json"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "shot_01_image_prompt",
+          "type": "STRING",
+          "links": [
+            35
+          ],
+          "localized_name": "shot_01_image_prompt"
+        },
+        {
+          "name": "shot_01_video_prompt",
+          "type": "STRING",
+          "links": [
+            36
+          ],
+          "localized_name": "shot_01_video_prompt"
+        },
+        {
+          "name": "shot_02_image_prompt",
+          "type": "STRING",
+          "links": [
+            37
+          ],
+          "localized_name": "shot_02_image_prompt"
+        },
+        {
+          "name": "shot_02_video_prompt",
+          "type": "STRING",
+          "links": [
+            38
+          ],
+          "localized_name": "shot_02_video_prompt"
+        },
+        {
+          "name": "shot_03_image_prompt",
+          "type": "STRING",
+          "links": [
+            39
+          ],
+          "localized_name": "shot_03_image_prompt"
+        },
+        {
+          "name": "shot_03_video_prompt",
+          "type": "STRING",
+          "links": [
+            40
+          ],
+          "localized_name": "shot_03_video_prompt"
+        },
+        {
+          "name": "shot_04_image_prompt",
+          "type": "STRING",
+          "links": [
+            41
+          ],
+          "localized_name": "shot_04_image_prompt"
+        },
+        {
+          "name": "shot_04_video_prompt",
+          "type": "STRING",
+          "links": [
+            42
+          ],
+          "localized_name": "shot_04_video_prompt"
+        },
+        {
+          "name": "campaign_plan_json",
+          "type": "STRING",
+          "links": [],
+          "localized_name": "campaign_plan_json"
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            43,
+            44,
+            45,
+            46
+          ],
+          "localized_name": "width"
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            47,
+            48,
+            49,
+            50
+          ],
+          "localized_name": "height"
+        },
+        {
+          "name": "duration",
+          "type": "FLOAT",
+          "links": [
+            51,
+            52,
+            53,
+            54
+          ],
+          "localized_name": "duration"
+        }
+      ],
+      "title": "🎬 3. DIRECTOR CREATIVO IA (Generador de Prompts y Plan de Rodaje)",
+      "properties": {
+        "Node name for S&R": "CommercialCreativeDirector"
+      },
+      "widgets_values": [
+        "Quiero un anuncio de lujo para este perfume. La modelo está en un ambiente nocturno elegante, transmite sensualidad y sofisticación. El producto debe sentirse exclusivo y premium.",
+        "Luxury & Exclusive",
+        "16:9 (Horizontal - 1280x720)",
+        5.0,
+        ""
+      ],
+      "color": "#8c5000",
+      "bgcolor": "#5c3300"
+    },
+    {
+      "id": 34,
+      "type": "MarkdownNote",
+      "pos": [
+        1060,
+        -580
+      ],
+      "size": [
+        660,
+        540
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "📋 Control Maestro: Reglas del Director IA & Formato Dinámico",
+      "properties": {},
+      "widgets_values": [
+        "### 🌟 Guía del Director Creativo IA\n\n1. **💡 Idea General del Anuncio:** Escribe tu visión en el Nodo 30. No necesitas pensar en prompts técnicos; el Director IA traduce tu idea en una narrativa coherente de 4 escenas publicitarias.\n2. **🎭 Estilos Disponibles:** `Luxury & Exclusive`, `Beauty & Cosmetics`, `Cinematic & Moody`, `High-Tech Minimalist`, `Fresh & Vibrant`.\n3. **📐 Selector de Formato (16:9 vs 9:16):**\n   - **16:9 (1280x720):** Master horizontal para YouTube, TV y Web.\n   - **9:16 (720x1280):** Master vertical para TikTok, Instagram Reels y YouTube Shorts.\n   *Al cambiar este selector, las dimensiones de los cuatro MiniMax H3 se actualizan automáticamente en tiempo real.*\n4. **⏱️ Duración Global:** 5.0 segundos por shot (20 segundos totales para el spot final).\n5. **🧠 Modularidad LLM:** Si dejas la entrada externa vacía, el motor publicitario nativo sintetiza los 8 prompts cinematográficos al instante sin gastar VRAM ni APIs. Si conectas un LLM externo, parseará el JSON generado de forma transparente."
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#1c2427"
+    },
+    {
+      "id": 35,
+      "type": "CommercialVideoAssembler",
+      "pos": [
+        500,
+        4580
+      ],
+      "size": [
+        440,
+        360
+      ],
+      "flags": {},
+      "order": 100,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video_1",
+          "type": "VIDEO",
+          "link": 55,
+          "localized_name": "video_1"
+        },
+        {
+          "name": "video_2",
+          "type": "VIDEO",
+          "link": 56,
+          "localized_name": "video_2"
+        },
+        {
+          "name": "video_3",
+          "type": "VIDEO",
+          "link": 57,
+          "localized_name": "video_3"
+        },
+        {
+          "name": "video_4",
+          "type": "VIDEO",
+          "link": 58,
+          "localized_name": "video_4"
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "link": null,
+          "localized_name": "filename_prefix",
+          "widget": {
+            "name": "filename_prefix"
+          }
+        },
+        {
+          "name": "audio_mode",
+          "type": "STRING",
+          "link": null,
+          "localized_name": "audio_mode",
+          "widget": {
+            "name": "audio_mode"
+          }
+        },
+        {
+          "name": "optional_master_soundtrack",
+          "type": "AUDIO",
+          "link": null,
+          "localized_name": "optional_master_soundtrack"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "final_video",
+          "type": "VIDEO",
+          "links": [
+            59
+          ],
+          "localized_name": "final_video"
+        }
+      ],
+      "title": "🎞️ Montaje Automático: Ensamblador de 4 Shots (FFmpeg / PyAV)",
+      "properties": {
+        "Node name for S&R": "CommercialVideoAssembler"
+      },
+      "widgets_values": [
+        "commercial/final_commercial",
+        "Concatenate Shot Audios (Native MiniMax)"
+      ],
+      "color": "#1b4965",
+      "bgcolor": "#132d42"
+    },
+    {
+      "id": 36,
+      "type": "SaveVideo",
+      "pos": [
+        980,
+        4580
+      ],
+      "size": [
+        360,
+        260
+      ],
+      "flags": {},
+      "order": 101,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "link": 59,
+          "localized_name": "video"
+        }
+      ],
+      "outputs": [],
+      "title": "🏆 SPOT PUBLICITARIO FINAL: 20s (commercial/final_commercial.mp4)",
+      "properties": {
+        "Node name for S&R": "SaveVideo"
+      },
+      "widgets_values": [
+        "commercial/final_commercial",
+        "auto",
+        "auto"
+      ],
+      "color": "#27ae60",
+      "bgcolor": "#1e8449"
+    },
+    {
+      "id": 37,
+      "type": "MarkdownNote",
+      "pos": [
+        1380,
+        4580
+      ],
+      "size": [
+        540,
+        360
+      ],
+      "flags": {},
+      "order": 102,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "🎵 Arquitectura de Audio y Montaje Final",
+      "properties": {},
+      "widgets_values": [
+        "### 🎞️ Montaje Secuencial Automatizado\n\n- **Orden de Edición:** `SHOT 1 (Hero)` ➔ `SHOT 2 (Macro)` ➔ `SHOT 3 (Beauty)` ➔ `SHOT 4 (Packshot)`.\n- **Preservación Total:** Ejecutado mediante FFmpeg con `-c copy` para garantizar cero pérdida de calidad, manteniendo resolución idéntica (16:9 ó 9:16) y 24 FPS constantes.\n- **Audio Sincronizado:** Cada clip de MiniMax H3 aporta su diseño sonoro estéreo nativo. El ensamblador concatena las pistas de audio en perfecta sincronización milimétrica.\n- **Pista Musical Maestra:** El nodo 35 cuenta con una entrada opcional `optional_master_soundtrack` para conectar posteriormente un tema musical completo para el comercial."
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#1c2427"
     }
   ],
   "links": [
@@ -1312,28 +1718,12 @@
       "IMAGE"
     ],
     [
-      3,
-      3,
-      0,
-      4,
-      3,
-      "STRING"
-    ],
-    [
       4,
       4,
       0,
       6,
       0,
       "IMAGE"
-    ],
-    [
-      5,
-      5,
-      0,
-      6,
-      5,
-      "STRING"
     ],
     [
       6,
@@ -1376,14 +1766,6 @@
       "IMAGE"
     ],
     [
-      11,
-      12,
-      0,
-      13,
-      3,
-      "STRING"
-    ],
-    [
       12,
       8,
       0,
@@ -1406,14 +1788,6 @@
       14,
       0,
       "IMAGE"
-    ],
-    [
-      15,
-      15,
-      0,
-      16,
-      5,
-      "STRING"
     ],
     [
       16,
@@ -1440,14 +1814,6 @@
       "IMAGE"
     ],
     [
-      19,
-      18,
-      0,
-      19,
-      3,
-      "STRING"
-    ],
-    [
       20,
       8,
       0,
@@ -1470,14 +1836,6 @@
       20,
       0,
       "IMAGE"
-    ],
-    [
-      23,
-      21,
-      0,
-      22,
-      5,
-      "STRING"
     ],
     [
       24,
@@ -1502,14 +1860,6 @@
       25,
       1,
       "IMAGE"
-    ],
-    [
-      27,
-      24,
-      0,
-      25,
-      3,
-      "STRING"
     ],
     [
       28,
@@ -1536,23 +1886,242 @@
       "IMAGE"
     ],
     [
-      31,
-      27,
-      0,
-      28,
-      5,
-      "STRING"
-    ],
-    [
       32,
       28,
       0,
       29,
       0,
       "VIDEO"
+    ],
+    [
+      33,
+      30,
+      0,
+      33,
+      0,
+      "STRING"
+    ],
+    [
+      34,
+      32,
+      0,
+      33,
+      4,
+      "STRING"
+    ],
+    [
+      35,
+      33,
+      0,
+      4,
+      3,
+      "STRING"
+    ],
+    [
+      36,
+      33,
+      1,
+      6,
+      5,
+      "STRING"
+    ],
+    [
+      37,
+      33,
+      2,
+      13,
+      3,
+      "STRING"
+    ],
+    [
+      38,
+      33,
+      3,
+      16,
+      5,
+      "STRING"
+    ],
+    [
+      39,
+      33,
+      4,
+      19,
+      3,
+      "STRING"
+    ],
+    [
+      40,
+      33,
+      5,
+      22,
+      5,
+      "STRING"
+    ],
+    [
+      41,
+      33,
+      6,
+      25,
+      3,
+      "STRING"
+    ],
+    [
+      42,
+      33,
+      7,
+      28,
+      5,
+      "STRING"
+    ],
+    [
+      43,
+      33,
+      9,
+      6,
+      2,
+      "INT"
+    ],
+    [
+      44,
+      33,
+      9,
+      16,
+      2,
+      "INT"
+    ],
+    [
+      45,
+      33,
+      9,
+      22,
+      2,
+      "INT"
+    ],
+    [
+      46,
+      33,
+      9,
+      28,
+      2,
+      "INT"
+    ],
+    [
+      47,
+      33,
+      10,
+      6,
+      3,
+      "INT"
+    ],
+    [
+      48,
+      33,
+      10,
+      16,
+      3,
+      "INT"
+    ],
+    [
+      49,
+      33,
+      10,
+      22,
+      3,
+      "INT"
+    ],
+    [
+      50,
+      33,
+      10,
+      28,
+      3,
+      "INT"
+    ],
+    [
+      51,
+      33,
+      11,
+      6,
+      4,
+      "FLOAT"
+    ],
+    [
+      52,
+      33,
+      11,
+      16,
+      4,
+      "FLOAT"
+    ],
+    [
+      53,
+      33,
+      11,
+      22,
+      4,
+      "FLOAT"
+    ],
+    [
+      54,
+      33,
+      11,
+      28,
+      4,
+      "FLOAT"
+    ],
+    [
+      55,
+      6,
+      0,
+      35,
+      0,
+      "VIDEO"
+    ],
+    [
+      56,
+      16,
+      0,
+      35,
+      1,
+      "VIDEO"
+    ],
+    [
+      57,
+      22,
+      0,
+      35,
+      2,
+      "VIDEO"
+    ],
+    [
+      58,
+      28,
+      0,
+      35,
+      3,
+      "VIDEO"
+    ],
+    [
+      59,
+      35,
+      0,
+      36,
+      0,
+      "VIDEO"
     ]
   ],
   "groups": [
+    {
+      "title": "🌟 PANEL DE CONTROL MAESTRO: DIRECTOR CREATIVO IA & FORMATO",
+      "bounding": [
+        80,
+        -680,
+        2260,
+        680
+      ],
+      "color": "#1c2833",
+      "font_size": 28
+    },
     {
       "title": "📸 ENTRADAS GLOBALES Y REGLAS DE PRESERVACIÓN",
       "bounding": [
@@ -1607,6 +2176,17 @@
       ],
       "color": "#8c5000",
       "font_size": 24
+    },
+    {
+      "title": "🎞️ MONTAJE AUTOMÁTICO & SPOT PUBLICITARIO FINAL (20 SEGUNDOS)",
+      "bounding": [
+        460,
+        4520,
+        1880,
+        500
+      ],
+      "color": "#27ae60",
+      "font_size": 28
     }
   ],
   "definitions": {

@@ -20,13 +20,13 @@ fi
 echo -e "${BLUE}=== [2/6] Preparando herramientas de descarga y ComfyUI Core... ===${NC}"
 
 # 1. Instalar aria2 para descargas multihilo ultra-rápidas
-if ! command -v aria2c &> /dev/null; then
-    echo -e "${YELLOW}Instalando aria2c (acelerador multihilo)...${NC}"
+if ! command -v aria2c &> /dev/null || ! command -v ffmpeg &> /dev/null; then
+    echo -e "${YELLOW}Instalando aria2c y ffmpeg...${NC}"
     if command -v apt-get &> /dev/null; then
-        apt-get update -qq && apt-get install -y -qq aria2 || true
+        apt-get update -qq && apt-get install -y -qq aria2 ffmpeg || true
     fi
 else
-    echo -e "${GREEN}✓ aria2c ya está instalado y disponible.${NC}"
+    echo -e "${GREEN}✓ aria2c y ffmpeg ya están instalados y disponibles.${NC}"
 fi
 
 # 2. Clonar ComfyUI si no existe o actualizarlo si ya existe
