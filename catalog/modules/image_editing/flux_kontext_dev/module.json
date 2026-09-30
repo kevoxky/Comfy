@@ -1,0 +1,27 @@
+{
+  "id": "flux_kontext_dev",
+  "name": "Flux Kontext Dev (Edición Contextual)",
+  "category": "image_editing",
+  "template_file": "flux_kontext_dev_basic.json",
+  "description": "Edición contextual con el modelo Kontext de Black Forest Labs sobre Flux. Permite insertar o modificar elementos respetando la coherencia global de la escena.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "flux1-kontext-dev.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev/resolve/main/flux1-kontext-dev.safetensors"
+    },
+    {
+      "role": "vae",
+      "filename": "ae.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

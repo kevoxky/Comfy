@@ -1,0 +1,31 @@
+{
+  "id": "ltx_2_3_id_lora",
+  "name": "LTX-2.3 ID LoRA (Consistencia Facial y Lip-Sync)",
+  "category": "video_generation",
+  "template_file": "video_ltx2_3_id_lora.json",
+  "description": "Animación de video y sincronización labial con LTX-2.3 utilizando un LoRA de identidad para garantizar que los rasgos faciales del actor no muten a lo largo de las tomas.",
+  "models": [
+    {
+      "role": "checkpoint",
+      "filename": "ltx-2.3-22b-dev-fp8.safetensors",
+      "dest_dir": "models/checkpoints",
+      "url": "https://huggingface.co/Lightricks/LTX-2.3-fp8/resolve/main/ltx-2.3-22b-dev-fp8.safetensors"
+    },
+    {
+      "role": "text_encoder",
+      "filename": "gemma_3_12B_it_fp4_mixed.safetensors",
+      "dest_dir": "models/text_encoders",
+      "url": "https://huggingface.co/Comfy-Org/ltx-2/resolve/main/split_files/text_encoders/gemma_3_12B_it_fp4_mixed.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-LTXVideo",
+      "git_url": "https://github.com/Lightricks/ComfyUI-LTXVideo.git"
+    },
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

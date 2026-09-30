@@ -1,0 +1,33 @@
+{
+  "id": "qwen_image_2_1_edit",
+  "name": "Qwen Image 2.1 (Edición de Imagen Multimodal)",
+  "category": "image_editing",
+  "template_file": "image_qwen_image_2_1_image_edit.json",
+  "description": "Edición contextual en lenguaje natural de imágenes existentes con resolución nativa de hasta 2048x2048.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "qwen_image_2.1_bf16.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_bf16.safetensors"
+    },
+    {
+      "role": "text_encoder",
+      "filename": "qwen3vl_8b_bf16.safetensors",
+      "dest_dir": "models/text_encoders",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_bf16.safetensors"
+    },
+    {
+      "role": "vae",
+      "filename": "qwen_image_2.1_vae_bf16.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

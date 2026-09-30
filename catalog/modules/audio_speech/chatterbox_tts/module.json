@@ -1,0 +1,18 @@
+{
+  "id": "chatterbox_tts",
+  "name": "ChatterBox TTS (Clonación de Voz y Multilingüe)",
+  "category": "audio_speech",
+  "template_file": "audio-chatterbox_tts_multilingual.json",
+  "description": "Motor de síntesis de voz y clonación 'zero-shot' de Resemble AI (Fill-ChatterBox). Permite clonar cualquier voz con una muestra de pocos segundos en más de 23 idiomas (incluyendo español), con control de expresividad y dramatismo.",
+  "models": [],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI_Fill-ChatterBox",
+      "git_url": "https://github.com/fillthefill/ComfyUI_Fill-ChatterBox.git"
+    },
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

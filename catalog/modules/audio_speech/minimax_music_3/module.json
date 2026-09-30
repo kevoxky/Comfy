@@ -1,0 +1,33 @@
+{
+  "id": "minimax_music_3",
+  "name": "MiniMax Music 3 (Texto a Música DiT)",
+  "category": "audio_speech",
+  "template_file": "audio_minimax_music_3.json",
+  "description": "Generador musical DiT de MiniMax capaz de crear canciones vocales con letra completa, instrumentales y arreglos orquestales/electrónicos.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "minimax_music3_dit_int8_convrot.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-Music-3/resolve/main/diffusion_models/minimax_music3_dit_int8_convrot.safetensors"
+    },
+    {
+      "role": "text_encoder",
+      "filename": "minimax_music3_text_encoder_pruned_int8_convrot.safetensors",
+      "dest_dir": "models/text_encoders",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-Music-3/resolve/main/text_encoders/minimax_music3_text_encoder_pruned_int8_convrot.safetensors"
+    },
+    {
+      "role": "audio_vae",
+      "filename": "minimax_music3_dav.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-Music-3/resolve/main/vae/minimax_music3_dav.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

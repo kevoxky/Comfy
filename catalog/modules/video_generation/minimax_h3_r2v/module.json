@@ -1,0 +1,49 @@
+{
+  "id": "minimax_h3_r2v",
+  "name": "MiniMax H3 Reference to Video (R2V)",
+  "category": "video_generation",
+  "template_file": "video_minimax_h3_r2v.json",
+  "description": "Generación controlada de video mediante múltiples imágenes de referencia, estilos y pista de audio de referencia con MiniMax H3.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors"
+    },
+    {
+      "role": "text_encoder",
+      "filename": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "dest_dir": "models/text_encoders",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors"
+    },
+    {
+      "role": "video_vae",
+      "filename": "minimax_h3_video_vae_int8_convrot.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_int8_convrot.safetensors"
+    },
+    {
+      "role": "audio_vae",
+      "filename": "minimax_h3_audio_vae_fp32.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors"
+    },
+    {
+      "role": "turbo_lora",
+      "filename": "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
+      "dest_dir": "models/loras",
+      "url": "https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    },
+    {
+      "name": "ComfyUI-VideoHelperSuite",
+      "git_url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git"
+    }
+  ]
+}

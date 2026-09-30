@@ -1,0 +1,21 @@
+{
+  "id": "qwen_multiangle_character",
+  "name": "Qwen 2511 Multi-Angle (Personaje en 8 Ángulos)",
+  "category": "image_editing",
+  "template_file": "templates-1_click_multiple_character_angles-v1.0.json",
+  "description": "Genera en un solo clic una hoja de contactos con 8 ángulos de cámara del mismo personaje (frontal, 3/4, perfil, contrapicado, etc.) manteniendo coherencia de identidad.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "qwen_image_edit_2511_bf16.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_bf16.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

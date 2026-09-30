@@ -1,0 +1,47 @@
+{
+  "id": "ltx_2_3_lipsync",
+  "name": "LTX-2.3 Lip-Sync (Imagen y Audio a Video)",
+  "category": "video_generation",
+  "template_file": "video_ltx2_3_ia2v.json",
+  "description": "Variante de LTX-2.3 alimentada con audio de entrada y fotograma para sincronización labial realista y animación condicionada por voz.",
+  "models": [
+    {
+      "role": "checkpoint",
+      "filename": "ltx-2.3-22b-dev-fp8.safetensors",
+      "dest_dir": "models/checkpoints",
+      "url": "https://huggingface.co/Lightricks/LTX-2.3-fp8/resolve/main/ltx-2.3-22b-dev-fp8.safetensors"
+    },
+    {
+      "role": "text_encoder",
+      "filename": "gemma_3_12B_it_fp4_mixed.safetensors",
+      "dest_dir": "models/text_encoders",
+      "url": "https://huggingface.co/Comfy-Org/ltx-2/resolve/main/split_files/text_encoders/gemma_3_12B_it_fp4_mixed.safetensors"
+    },
+    {
+      "role": "distilled_lora",
+      "filename": "ltx_2.3_22b_distilled_1.1_lora_dynamic_fro09_avg_rank_111_bf16.safetensors",
+      "dest_dir": "models/loras",
+      "url": "https://huggingface.co/Comfy-Org/ltx-2.3/resolve/main/split_files/loras/ltx_2.3_22b_distilled_1.1_lora_dynamic_fro09_avg_rank_111_bf16.safetensors"
+    },
+    {
+      "role": "latent_spatial_upscaler",
+      "filename": "ltx-2.3-spatial-upscaler-x2-1.1.safetensors",
+      "dest_dir": "models/latent_upscale_models",
+      "url": "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-spatial-upscaler-x2-1.1.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-LTXVideo",
+      "git_url": "https://github.com/Lightricks/ComfyUI-LTXVideo.git"
+    },
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    },
+    {
+      "name": "ComfyUI-VideoHelperSuite",
+      "git_url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git"
+    }
+  ]
+}

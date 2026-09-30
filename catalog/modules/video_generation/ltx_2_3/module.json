@@ -1,0 +1,156 @@
+{
+  "id": "ltx_2_3",
+  "name": "Lightricks LTX-2.3 (DiT 22B + Gemma 3 12B + Latent Spatial Upscaler)",
+  "category": "video_generation",
+  "developer": "Lightricks",
+  "description": "Modelo fundacional de video DiT de 22 mil millones de parámetros con comprensión avanzada mediante Gemma 3 12B IT, síntesis de audio estéreo integrada y reescalador espacial en espacio latente (2x).",
+  "comfy_min_version": "0.33.0",
+  "nodes": {
+    "subgraph_type": "2454ad83-157c-40dd-9f19-5daaf4041ce0",
+    "subgraph_name": "Image to Video (LTX-2.3)",
+    "core_nodes_used": [
+      "CheckpointLoaderSimple",
+      "LTXAVTextEncoderLoader",
+      "LTXVAudioVAELoader",
+      "LatentUpscaleModelLoader",
+      "LoraLoaderModelOnly",
+      "LoraLoader",
+      "LTXVPreprocess",
+      "LTXVConditioning",
+      "LTXVImgToVideoInplace",
+      "EmptyLTXVLatentVideo",
+      "LTXVEmptyLatentAudio",
+      "LTXVConcatAVLatent",
+      "LTXVSeparateAVLatent",
+      "LTXVLatentUpsampler",
+      "LTXVCropGuides",
+      "LTXVAudioVAEDecode",
+      "TextGenerateLTX2Prompt",
+      "CFGGuider",
+      "ManualSigmas",
+      "SamplerCustomAdvanced",
+      "KSamplerSelect",
+      "VAEDecodeTiled",
+      "CreateVideo",
+      "SaveVideo",
+      "LoadImage"
+    ]
+  },
+  "interface": {
+    "inputs": [
+      {
+        "name": "first_frame",
+        "type": "IMAGE",
+        "required": false,
+        "description": "Imagen inicial para animación I2V. Si se omite o desconecta, genera en modo Text-to-Video."
+      },
+      {
+        "name": "prompt",
+        "type": "STRING",
+        "required": true,
+        "description": "Prompt multimodal que describe acciones continuas en el tiempo, detalles visuales y sonido/diálogos requeridos."
+      },
+      {
+        "name": "prompt_enhance",
+        "type": "BOOLEAN",
+        "default": false,
+        "description": "Activa el nodo LLM 'TextGenerateLTX2Prompt' para enriquecer el prompt automáticamente antes de enviarlo al modelo de difusión."
+      },
+      {
+        "name": "width",
+        "type": "INT",
+        "default": 1280,
+        "constraint": "Múltiplos de 32 (resoluciones típicas: 1280, 1920, 768)"
+      },
+      {
+        "name": "height",
+        "type": "INT",
+        "default": 720,
+        "constraint": "Múltiplos de 32 (resoluciones típicas: 720, 1080, 768)"
+      },
+      {
+        "name": "duration",
+        "type": "INT",
+        "default": 5,
+        "description": "Duración en segundos del video"
+      },
+      {
+        "name": "fps",
+        "type": "INT",
+        "default": 25,
+        "description": "Fotogramas por segundo del video resultante"
+      },
+      {
+        "name": "seed",
+        "type": "INT",
+        "default": 60540193790228
+      }
+    ],
+    "outputs": [
+      {
+        "name": "video",
+        "type": "VIDEO",
+        "description": "Contenedor de video (MP4) con audio estéreo sincronizado nativo"
+      }
+    ]
+  },
+  "models": [
+    {
+      "role": "checkpoint",
+      "filename": "ltx-2.3-22b-dev-fp8.safetensors",
+      "dest_dir": "models/checkpoints",
+      "size_gb": 27.14,
+      "url": "https://huggingface.co/Lightricks/LTX-2.3-fp8/resolve/main/ltx-2.3-22b-dev-fp8.safetensors"
+    },
+    {
+      "role": "text_encoder",
+      "filename": "gemma_3_12B_it_fp4_mixed.safetensors",
+      "dest_dir": "models/text_encoders",
+      "size_gb": 8.80,
+      "url": "https://huggingface.co/Comfy-Org/ltx-2/resolve/main/split_files/text_encoders/gemma_3_12B_it_fp4_mixed.safetensors"
+    },
+    {
+      "role": "distilled_lora",
+      "filename": "ltx_2.3_22b_distilled_1.1_lora_dynamic_fro09_avg_rank_111_bf16.safetensors",
+      "dest_dir": "models/loras",
+      "size_gb": 2.55,
+      "url": "https://huggingface.co/Comfy-Org/ltx-2.3/resolve/main/split_files/loras/ltx_2.3_22b_distilled_1.1_lora_dynamic_fro09_avg_rank_111_bf16.safetensors"
+    },
+    {
+      "role": "text_encoder_lora",
+      "filename": "gemma-3-12b-it-abliterated_lora_rank64_bf16.safetensors",
+      "dest_dir": "models/loras",
+      "size_gb": 0.59,
+      "url": "https://huggingface.co/Comfy-Org/ltx-2/resolve/main/split_files/loras/gemma-3-12b-it-abliterated_lora_rank64_bf16.safetensors"
+    },
+    {
+      "role": "latent_spatial_upscaler",
+      "filename": "ltx-2.3-spatial-upscaler-x2-1.1.safetensors",
+      "dest_dir": "models/latent_upscale_models",
+      "size_gb": 0.93,
+      "url": "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-spatial-upscaler-x2-1.1.safetensors"
+    }
+  ],
+  "sample_assets": [
+    {
+      "filename": "egyptian_queen.png",
+      "dest_dir": "input",
+      "url": "https://raw.githubusercontent.com/Comfy-Org/workflow_templates/main/input/egyptian_queen.png"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-LTXVideo",
+      "git_url": "https://github.com/Lightricks/ComfyUI-LTXVideo.git",
+      "notes": "Los nodos base vienen nativos en comfy-core >= 0.33.0, este repositorio añade extensiones y compatibilidad adicional."
+    },
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    },
+    {
+      "name": "ComfyUI-VideoHelperSuite",
+      "git_url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git"
+    }
+  ]
+}

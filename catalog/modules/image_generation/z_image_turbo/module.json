@@ -1,0 +1,27 @@
+{
+  "id": "z_image_turbo",
+  "name": "Z-Image-Turbo (y versión Int8)",
+  "category": "image_generation",
+  "template_file": "image_z_image_turbo.json",
+  "description": "Generador ultraligero y rápido en 4-8 pasos con soporte para cuantización Int8 nativa. Excelente para prototipado rápido de concepts y assets.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "z_image_turbo_fp8.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/z-image/resolve/main/z_image_turbo_fp8.safetensors"
+    },
+    {
+      "role": "vae",
+      "filename": "ae.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

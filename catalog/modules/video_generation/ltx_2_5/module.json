@@ -1,0 +1,53 @@
+{
+  "id": "ltx_2_5",
+  "name": "Lightricks LTX-2.5 (DiT 22B + Gemma 4 12B)",
+  "category": "video_generation",
+  "template_file": "video_ltx2_5_i2v.json",
+  "description": "La generación más moderna de Lightricks con text encoder Gemma 4 12B, consistencia multi-shot nativa, audio estéreo integrado y reescalador latente 2x.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors"
+    },
+    {
+      "role": "text_encoder",
+      "filename": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "dest_dir": "models/text_encoders",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors"
+    },
+    {
+      "role": "video_vae",
+      "filename": "ltx-2.5-video-vae-bf16.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors"
+    },
+    {
+      "role": "audio_vae",
+      "filename": "ltx-2.5-audio-vae-bf16.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors"
+    },
+    {
+      "role": "latent_spatial_upscaler",
+      "filename": "ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+      "dest_dir": "models/latent_upscale_models",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-LTXVideo",
+      "git_url": "https://github.com/Lightricks/ComfyUI-LTXVideo.git"
+    },
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    },
+    {
+      "name": "ComfyUI-VideoHelperSuite",
+      "git_url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git"
+    }
+  ]
+}

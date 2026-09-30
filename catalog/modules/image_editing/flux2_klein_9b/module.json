@@ -1,0 +1,33 @@
+{
+  "id": "flux2_klein_9b",
+  "name": "Flux.2 [Klein] 9B (Edición de Imagen)",
+  "category": "image_editing",
+  "template_file": "image_flux2_klein_image_edit_9b_base.json",
+  "description": "Variante optimizada de 9B parámetros de Flux.2 diseñada específicamente para edición guiada por imagen y texto con preservación de identidad.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "flux2_klein_9b_base.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/flux2-klein-9B/resolve/main/split_files/diffusion_models/flux2_klein_9b_base.safetensors"
+    },
+    {
+      "role": "text_encoder",
+      "filename": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "dest_dir": "models/text_encoders",
+      "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn_scaled.safetensors"
+    },
+    {
+      "role": "vae",
+      "filename": "ae.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "krea2_turbo",
+  "name": "Krea-2 Turbo (Estética Artística y Rápida)",
+  "category": "image_generation",
+  "template_file": "image_krea2_turbo_t2i.json",
+  "description": "Modelo de difusión ultra-rápido de Krea AI con acabado artístico curado, excelente estilización y renderizado dinámico en 4-8 pasos.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "krea2_turbo_fp8.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/split_files/diffusion_models/krea2_turbo_fp8.safetensors"
+    },
+    {
+      "role": "text_encoder",
+      "filename": "qwen2.5_vl_7b_fp8.safetensors",
+      "dest_dir": "models/text_encoders",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/split_files/text_encoders/qwen2.5_vl_7b_fp8.safetensors"
+    },
+    {
+      "role": "vae",
+      "filename": "krea2_vae.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/split_files/vae/krea2_vae.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

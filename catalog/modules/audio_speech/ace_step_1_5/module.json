@@ -1,0 +1,39 @@
+{
+  "id": "ace_step_1_5",
+  "name": "ACE-Step 1.5XL Turbo (Texto a Música y Canciones)",
+  "category": "audio_speech",
+  "template_file": "audio_ace_step1_5_xl_turbo.json",
+  "description": "Modelo avanzado de composición musical con soporte para generación de pistas instrumentales completas, armonías, percusión y canciones con estructura lírica.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "acestep_v1.5_xl_turbo_bf16.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/ace_step_1.5_ComfyUI_files/resolve/main/split_files/diffusion_models/acestep_v1.5_xl_turbo_bf16.safetensors"
+    },
+    {
+      "role": "vae",
+      "filename": "ace_1.5_vae.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/Comfy-Org/ace_step_1.5_ComfyUI_files/resolve/main/split_files/vae/ace_1.5_vae.safetensors"
+    },
+    {
+      "role": "text_encoder_4b",
+      "filename": "qwen_4b_ace15.safetensors",
+      "dest_dir": "models/text_encoders",
+      "url": "https://huggingface.co/Comfy-Org/ace_step_1.5_ComfyUI_files/resolve/main/split_files/text_encoders/qwen_4b_ace15.safetensors"
+    },
+    {
+      "role": "text_encoder_0.6b",
+      "filename": "qwen_0.6b_ace15.safetensors",
+      "dest_dir": "models/text_encoders",
+      "url": "https://huggingface.co/Comfy-Org/ace_step_1.5_ComfyUI_files/resolve/main/split_files/text_encoders/qwen_0.6b_ace15.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

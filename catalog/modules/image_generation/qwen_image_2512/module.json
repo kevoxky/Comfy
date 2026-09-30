@@ -1,0 +1,21 @@
+{
+  "id": "qwen_image_2512",
+  "name": "Qwen Image 2512 (Última Generación Visual)",
+  "category": "image_generation",
+  "template_file": "image_qwen_Image_2512.json",
+  "description": "Versión 2512 del modelo visual Qwen con fidelidad anatómica de manos y rostros optimizada y resolución panorámica.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "qwen_image_2512_bf16.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2512/resolve/main/qwen_image_2512_bf16.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

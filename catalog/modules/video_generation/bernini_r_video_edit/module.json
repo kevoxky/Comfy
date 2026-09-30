@@ -1,0 +1,21 @@
+{
+  "id": "bernini_r_video_edit",
+  "name": "Bernini-R (Edición y Transformación de Video)",
+  "category": "video_generation",
+  "template_file": "video_bernini_r_video_editing.json",
+  "description": "Modelo de difusión enfocado en video-to-video editing para alterar la apariencia de sujetos, iluminación de la escena o trasfondo en tomas cinematográficas.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "bernini_r_video_edit_fp8.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Bernini-R/resolve/main/bernini_r_video_edit_fp8.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

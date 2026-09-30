@@ -1,0 +1,27 @@
+{
+  "id": "qwen_image_edit_2509",
+  "name": "Qwen Image Edit 2509 (ControlNet Relight & Depth)",
+  "category": "image_editing",
+  "template_file": "image_qwen_image_edit_2509.json",
+  "description": "ControlNet avanzado para reiluminación (relighting), pose y edición precisa de elementos sobre modelos Qwen.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "qwen_image_edit_2509_bf16.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_bf16.safetensors"
+    },
+    {
+      "role": "vae",
+      "filename": "qwen_image_vae.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/vae/qwen_image_vae.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

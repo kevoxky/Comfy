@@ -1,0 +1,39 @@
+{
+  "id": "flux2_dev",
+  "name": "Flux.2 Dev (Black Forest Labs)",
+  "category": "image_generation",
+  "template_file": "image_flux2.json",
+  "description": "Nueva generación Flux.2 de Black Forest Labs con fotorrealismo extremo, fidelidad de texto inigualable y renderizado de piel y materiales de máxima fidelidad.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "flux2-dev-fp8.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/flux2-dev/resolve/main/split_files/diffusion_models/flux2-dev-fp8.safetensors"
+    },
+    {
+      "role": "text_encoder_t5",
+      "filename": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "dest_dir": "models/text_encoders",
+      "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn_scaled.safetensors"
+    },
+    {
+      "role": "text_encoder_clip",
+      "filename": "clip_l.safetensors",
+      "dest_dir": "models/clip",
+      "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
+    },
+    {
+      "role": "vae",
+      "filename": "ae.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

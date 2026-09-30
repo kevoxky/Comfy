@@ -1,0 +1,27 @@
+{
+  "id": "flux1_fill_inpaint",
+  "name": "Flux.1 Fill Dev (Relleno Generativo e Inpainting)",
+  "category": "image_editing",
+  "template_file": "flux_fill_inpaint_example.json",
+  "description": "Relleno generativo e inpainting con Flux.1 Fill Dev. Elimina o sustituye cualquier sección de una imagen delimitada por una máscara sin dejar costuras visibles.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "flux1-fill-dev.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.1-Fill-dev/resolve/main/flux1-fill-dev.safetensors"
+    },
+    {
+      "role": "vae",
+      "filename": "ae.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

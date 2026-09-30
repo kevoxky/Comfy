@@ -1,0 +1,30 @@
+# Model weights (never commit gigabyte binaries to git)
+*.safetensors
+*.ckpt
+*.pt
+*.bin
+*.pth
+*.onnx
+
+# ComfyUI runtime outputs & caches
+output/
+temp/
+input/*.png
+!input/.gitkeep
+user/
+cache/
+
+# Python & Environment
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+.env.runtime
+
+# OS and logs
+.DS_Store
+Thumbs.db
+*.log
+scratch/

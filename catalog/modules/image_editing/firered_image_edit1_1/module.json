@@ -1,0 +1,27 @@
+{
+  "id": "firered_image_edit1_1",
+  "name": "FireRed Image Edit 1.1",
+  "category": "image_editing",
+  "template_file": "image_firered_image_edit1_1.json",
+  "description": "Modelo especializado en edición facial, alteración de atuendos, cambio de fondos y edición guiada de sujetos humanos.",
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "firered_image_edit_1.1_fp8.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/FireRed-Image-Edit-1.1/resolve/main/firered_image_edit_1.1_fp8.safetensors"
+    },
+    {
+      "role": "vae",
+      "filename": "ae.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

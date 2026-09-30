@@ -1,0 +1,143 @@
+{
+  "id": "minimax_h3",
+  "name": "MiniMax H3 Video & Audio Generation",
+  "category": "video_generation",
+  "description": "Modelo omnimodal para generación de video de hasta 2K a 24fps con audio estéreo nativo integrado (diálogos, SFX, música en un solo pase). Soporta T2V, I2V y FL2V con aceleración Turbo LoRA.",
+  "comfy_min_version": "0.33.0",
+  "nodes": {
+    "subgraph_type": "4c314f31-ecda-4b08-ae98-faaba1bf613f",
+    "subgraph_name": "Image to Video (MiniMax H3)",
+    "core_nodes_used": [
+      "MiniMaxH3ImageToVideo",
+      "UNETLoader",
+      "CLIPLoader",
+      "VAELoader",
+      "VAEDecode",
+      "VAEDecodeAudio",
+      "CreateVideo",
+      "BasicGuider",
+      "BasicScheduler",
+      "KSamplerSelect",
+      "SamplerCustomAdvanced",
+      "LoraLoaderModelOnly",
+      "ResolutionSelector",
+      "SaveVideo"
+    ]
+  },
+  "interface": {
+    "inputs": [
+      {
+        "name": "first_frame",
+        "type": "IMAGE",
+        "required": false,
+        "description": "Primer fotograma para Image-to-Video. Si no se conecta, opera como Text-to-Video."
+      },
+      {
+        "name": "last_frame",
+        "type": "IMAGE",
+        "required": false,
+        "description": "Último fotograma opcional para animación interpolada de inicio a fin."
+      },
+      {
+        "name": "prompt",
+        "type": "STRING",
+        "description": "Descripción de escenas, movimiento de cámara y audio (SFX/música). Admite tokens 'embedding:<nombre>'."
+      },
+      {
+        "name": "width",
+        "type": "INT",
+        "default": 1344,
+        "constraint": "Múltiplo de 32, eje corto máx 768px"
+      },
+      {
+        "name": "height",
+        "type": "INT",
+        "default": 768,
+        "constraint": "Múltiplo de 32, eje corto máx 768px"
+      },
+      {
+        "name": "duration",
+        "type": "FLOAT",
+        "default": 5.0,
+        "description": "Segundos de video (ajusta automáticamente a bloques de 17 frames a 24fps)"
+      },
+      {
+        "name": "turbo_mode",
+        "type": "BOOLEAN",
+        "default": false,
+        "description": "Activa inferencia rápida con Turbo LoRA (4 u 8 pasos)"
+      },
+      {
+        "name": "turbo_steps",
+        "type": "INT",
+        "default": 8,
+        "options": [4, 8]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "video",
+        "type": "VIDEO",
+        "description": "Contenedor de video completo con pista de audio multiplexada nativa"
+      }
+    ]
+  },
+  "models": [
+    {
+      "role": "diffusion_model",
+      "filename": "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "size_gb": 19.53,
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors"
+    },
+    {
+      "role": "text_encoder",
+      "filename": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "dest_dir": "models/text_encoders",
+      "size_gb": 14.61,
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors"
+    },
+    {
+      "role": "video_vae",
+      "filename": "minimax_h3_video_vae_int8_convrot.safetensors",
+      "dest_dir": "models/vae",
+      "size_gb": 2.62,
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_int8_convrot.safetensors"
+    },
+    {
+      "role": "audio_vae",
+      "filename": "minimax_h3_audio_vae_fp32.safetensors",
+      "dest_dir": "models/vae",
+      "size_gb": 0.56,
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors"
+    },
+    {
+      "role": "lora_turbo_8step",
+      "filename": "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
+      "dest_dir": "models/loras",
+      "size_gb": 1.82,
+      "url": "https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors"
+    },
+    {
+      "role": "lora_turbo_4step",
+      "filename": "minimax_h3_fl2v_turbo_4step_v1.0_768p_comfyui_bf16.safetensors",
+      "dest_dir": "models/loras",
+      "size_gb": 1.82,
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/loras/minimax_h3_fl2v_turbo_4step_v1.0_768p_comfyui_bf16.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    },
+    {
+      "name": "ComfyUI-VideoHelperSuite",
+      "git_url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git"
+    },
+    {
+      "name": "ComfyUI-KJNodes",
+      "git_url": "https://github.com/kijai/ComfyUI-KJNodes.git"
+    }
+  ]
+}

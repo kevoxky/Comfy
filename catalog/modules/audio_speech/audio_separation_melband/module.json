@@ -1,0 +1,25 @@
+{
+  "id": "audio_separation_melband",
+  "name": "MelBandRoFormer (Separación de Pistas y Voz)",
+  "category": "audio_speech",
+  "template_file": "audio_melbandroformer_audio_separation.json",
+  "description": "Aislamiento de voz humana y separación de stems (voz acapella, bajo, batería, instrumentos) con calidad de estudio usando MelBand-RoFormer.",
+  "models": [
+    {
+      "role": "separation_model",
+      "filename": "MelBandRoformer_fp16.safetensors",
+      "dest_dir": "models/audio_separation",
+      "url": "https://huggingface.co/Kijai/MelBandRoFormer_comfy/resolve/main/MelBandRoformer_fp16.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-MelBandRoFormer",
+      "git_url": "https://github.com/kijai/ComfyUI-MelBandRoFormer.git"
+    },
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    }
+  ]
+}

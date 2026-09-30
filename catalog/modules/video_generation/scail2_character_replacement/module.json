@@ -1,0 +1,31 @@
+{
+  "id": "scail2_character_replacement",
+  "name": "SCAIL-2 (Reemplazo de Personaje en Video)",
+  "category": "video_generation",
+  "template_file": "video_wan21_scail2_character_replacement.json",
+  "description": "Reemplazo de actores y personajes en secuencias de video existentes con el modelo SCAIL-2 sobre Wan 2.1. Sustituye al sujeto manteniendo intacta la iluminación de la escena, la interacción con objetos y la vestimenta.",
+  "models": [
+    {
+      "role": "scail_model",
+      "filename": "scail2_wan21_14b_fp8.safetensors",
+      "dest_dir": "models/diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/scail2_wan21_14b_fp8.safetensors"
+    },
+    {
+      "role": "vae",
+      "filename": "wan_2.1_vae.safetensors",
+      "dest_dir": "models/vae",
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    },
+    {
+      "name": "ComfyUI-VideoHelperSuite",
+      "git_url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git"
+    }
+  ]
+}

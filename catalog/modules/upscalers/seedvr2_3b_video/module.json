@@ -1,0 +1,25 @@
+{
+  "id": "seedvr2_3b_video",
+  "name": "SeedVR2 3B Int8 (Video Upscaler Coherente)",
+  "category": "upscalers",
+  "template_file": "utility_seedvr2_3b_int8_upscale_video.json",
+  "description": "Super-resolución temporal de video con SeedVR2 3B. Escala videos a resolución 4K manteniendo coherencia matemática estricta entre fotogramas para eliminar el parpadeo (flickering).",
+  "models": [
+    {
+      "role": "upscaler_video_model",
+      "filename": "seedvr2_3b_int8_scaled.safetensors",
+      "dest_dir": "models/upscale_models",
+      "url": "https://huggingface.co/Comfy-Org/SeedVR2/resolve/main/split_files/upscale_models/seedvr2_3b_int8_scaled.safetensors"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Manager",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git"
+    },
+    {
+      "name": "ComfyUI-VideoHelperSuite",
+      "git_url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git"
+    }
+  ]
+}
