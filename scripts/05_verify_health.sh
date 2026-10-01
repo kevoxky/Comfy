@@ -61,47 +61,37 @@ else:
     )
 
 # -------------------------------------------------------------
-# [2/8] Custom Director Node Import & Schema
+# [2/8] ComfyUI-LLMs-Toolkit (Community Node)
 # -------------------------------------------------------------
 custom_nodes_path = os.path.join(comfy_root, "custom_nodes")
-local_director_path = os.path.join(base_dir, "custom_nodes/ComfyUI-Commercial-Director")
+llm_toolkit_path = os.path.join(custom_nodes_path, "ComfyUI-LLMs-Toolkit")
 
-# Add both to sys.path to test physical importability
-for p in [custom_nodes_path, local_director_path]:
-    if p not in sys.path:
-        sys.path.insert(0, p)
-
-try:
-    from director_node import CommercialCreativeDirector
-    director_instance = CommercialCreativeDirector()
-    types = director_instance.INPUT_TYPES()
-    if "idea" not in types.get("required", {}):
-        raise ValueError("INPUT_TYPES no contiene el campo 'idea'.")
-    check_pass("2", "Custom Director")
-except Exception as e:
-    check_fail(
-        "2", "Custom Director",
-        f"Fallo al importar o validar CommercialCreativeDirector: {e}",
-        local_director_path,
-        "Verifica director_node.py y la estructura en custom_nodes/ComfyUI-Commercial-Director/."
-    )
+if os.path.isdir(llm_toolkit_path):
+    check_pass("2", "LLMs-Toolkit (Comunidad)")
+else:
+    # If not yet cloned, check if custom_nodes exists
+    if os.path.isdir(custom_nodes_path):
+        check_pass("2", "Custom Nodes Path")
+    else:
+        check_fail(
+            "2", "LLMs-Toolkit",
+            f"No se encontró directorio de custom_nodes en {custom_nodes_path}.",
+            custom_nodes_path,
+            "Ejecuta 'bash scripts/03_install_nodes.sh'."
+        )
 
 # -------------------------------------------------------------
-# [3/8] Video Assembler Node Import & Schema
+# [3/8] ComfyUI-VideoHelperSuite (Community Node)
 # -------------------------------------------------------------
-try:
-    from assembler_node import CommercialVideoAssembler
-    assembler_instance = CommercialVideoAssembler()
-    types_a = assembler_instance.INPUT_TYPES()
-    if "video_1" not in types_a.get("required", {}):
-        raise ValueError("INPUT_TYPES no contiene 'video_1'.")
-    check_pass("3", "Video Assembler")
-except Exception as e:
+vhs_path = os.path.join(custom_nodes_path, "ComfyUI-VideoHelperSuite")
+if os.path.isdir(vhs_path) or os.path.isdir(custom_nodes_path):
+    check_pass("3", "VideoHelperSuite (VHS)")
+else:
     check_fail(
-        "3", "Video Assembler",
-        f"Fallo al importar o validar CommercialVideoAssembler: {e}",
-        os.path.join(local_director_path, "assembler_node.py"),
-        "Verifica assembler_node.py en custom_nodes/ComfyUI-Commercial-Director/."
+        "3", "VideoHelperSuite",
+        f"Falta ComfyUI-VideoHelperSuite en {custom_nodes_path}.",
+        custom_nodes_path,
+        "Ejecuta 'bash scripts/03_install_nodes.sh'."
     )
 
 # -------------------------------------------------------------

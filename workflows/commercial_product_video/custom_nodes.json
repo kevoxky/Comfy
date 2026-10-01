@@ -2,16 +2,16 @@
   {
     "name": "ComfyUI-Manager",
     "git_url": "https://github.com/ltdrdata/ComfyUI-Manager.git",
-    "description": "Gestor de nodos personalizados y actualizaciones"
+    "description": "Gestor de nodos personalizados y actualizaciones oficiales"
   },
   {
     "name": "ComfyUI-VideoHelperSuite",
     "git_url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git",
-    "description": "Nodos para combinar video y audio estéreo sincronizado, exportación MP4"
+    "description": "Nodos estándar de la comunidad para combinar video, audio estéreo y montaje"
   },
   {
-    "name": "ComfyUI-Commercial-Director",
-    "git_url": "local",
-    "description": "Director Creativo IA y Ensamblador Automático de Videos Comerciales Multi-Shot"
+    "name": "ComfyUI-LLMs-Toolkit",
+    "git_url": "https://github.com/ComfyUI-Kelin/ComfyUI-LLMs-Toolkit.git",
+    "description": "Toolkit oficial de la comunidad para conectar LLMs abiertos (DeepSeek, Qwen, etc.) vía API con Provider Manager visual"
   }
 ]
