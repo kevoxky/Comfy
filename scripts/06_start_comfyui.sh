@@ -25,7 +25,7 @@ echo -e "${BLUE}=== [6/6] Verificando servicio ComfyUI en Puerto 8188... ===${NC
 if pgrep -f "main.py" > /dev/null; then
     echo -e "${GREEN}✓ ComfyUI ya se encuentra en ejecución activa.${NC}"
 else
-    echo -e "${YELLOW}Iniciando ComfyUI optimizado para RTX 5090...${NC}"
+    echo -e "${YELLOW}Iniciando ComfyUI optimizado para ${GPU_NAME:-NVIDIA GPU} (${GPU_ARCH:-Blackwell})...${NC}"
     cd "$COMFY_ROOT"
     nohup python3 main.py --listen 0.0.0.0 --port 8188 --fast --preview-method auto > /workspace/comfyui.log 2>&1 &
     sleep 3
