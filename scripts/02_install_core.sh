@@ -45,15 +45,16 @@ fi
 # 3. Validar y preservar el PyTorch del contenedor (especialmente en Blackwell / CUDA 13.x)
 if python3 -c "import torch; assert torch.cuda.is_available()" 2>/dev/null; then
     echo -e "${GREEN}✓ PyTorch con aceleración CUDA detectado. Preservando versión nativa del contenedor (Blackwell/CUDA).${NC}"
-    # Instalar dependencias multimedia adicionales sin tocar torch
-    pip install --no-cache-dir soundfile av imageio-ffmpeg -q || true
+    # Instalar dependencias multimedia y de visión por computador sin tocar torch
+    echo -e "${YELLOW}Instalando librerías multimedia y aceleración de visión (opencv, onnxruntime, timm, einops)...${NC}"
+    pip install --no-cache-dir soundfile av imageio-ffmpeg opencv-python onnxruntime-gpu timm einops kornia scipy -q || true
     if [ -f "$COMFY_ROOT/requirements.txt" ]; then
         echo -e "${YELLOW}Instalando dependencias de ComfyUI (preservando PyTorch nativo)...${NC}"
         pip install --no-cache-dir -r "$COMFY_ROOT/requirements.txt" --no-deps -q || true
     fi
 else
     echo -e "${YELLOW}Instalando dependencias multimedia y ComfyUI core...${NC}"
-    pip install --no-cache-dir torchaudio torchvision soundfile av imageio-ffmpeg -q || true
+    pip install --no-cache-dir torchaudio torchvision soundfile av imageio-ffmpeg opencv-python onnxruntime-gpu timm einops kornia scipy -q || true
     if [ -f "$COMFY_ROOT/requirements.txt" ]; then
         pip install --no-cache-dir -r "$COMFY_ROOT/requirements.txt" -q || true
     fi

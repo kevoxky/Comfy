@@ -61,27 +61,37 @@ else:
     )
 
 # -------------------------------------------------------------
-# [2/8] ComfyUI-LLMs-Toolkit (Community Node)
+# [2/8] Suite de Nodos Oficiales de Estudio
 # -------------------------------------------------------------
 custom_nodes_path = os.path.join(comfy_root, "custom_nodes")
-llm_toolkit_path = os.path.join(custom_nodes_path, "ComfyUI-LLMs-Toolkit")
+essential_studio_nodes = [
+    "ComfyUI-Manager",
+    "rgthree-comfy",
+    "ComfyUI-Custom-Scripts",
+    "ComfyUI-Impact-Pack",
+    "ComfyUI_IPAdapter_plus",
+    "ComfyUI-IC-Light",
+    "ComfyUI-VideoHelperSuite",
+    "ComfyUI-LLMs-Toolkit",
+    "ComfyUI_LayerStyle",
+    "ComfyUI-WanVideoWrapper",
+    "comfyui_mini_max",
+    "ComfyUI-GGUF"
+]
+installed_count = sum(1 for n in essential_studio_nodes if os.path.isdir(os.path.join(custom_nodes_path, n)))
 
-if os.path.isdir(llm_toolkit_path):
-    check_pass("2", "LLMs-Toolkit (Comunidad)")
+if installed_count > 0 or os.path.isdir(custom_nodes_path):
+    check_pass("2", f"Studio Nodes ({installed_count} instalados)")
 else:
-    # If not yet cloned, check if custom_nodes exists
-    if os.path.isdir(custom_nodes_path):
-        check_pass("2", "Custom Nodes Path")
-    else:
-        check_fail(
-            "2", "LLMs-Toolkit",
-            f"No se encontró directorio de custom_nodes en {custom_nodes_path}.",
-            custom_nodes_path,
-            "Ejecuta 'bash scripts/03_install_nodes.sh'."
-        )
+    check_fail(
+        "2", "Studio Nodes",
+        f"No se encontraron custom nodes en {custom_nodes_path}.",
+        custom_nodes_path,
+        "Ejecuta 'bash scripts/03_install_nodes.sh'."
+    )
 
 # -------------------------------------------------------------
-# [3/8] ComfyUI-VideoHelperSuite (Community Node)
+# [3/8] ComfyUI-VideoHelperSuite (VHS) & Video Tooling
 # -------------------------------------------------------------
 vhs_path = os.path.join(custom_nodes_path, "ComfyUI-VideoHelperSuite")
 if os.path.isdir(vhs_path) or os.path.isdir(custom_nodes_path):
