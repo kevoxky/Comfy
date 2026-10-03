@@ -17,6 +17,8 @@ NC='\033[0m'
 
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$BASE_DIR"
+export BASE_DIR
+export GIT_TERMINAL_PROMPT=0
 
 # 1. Determinar el workflow objetivo
 TARGET_INPUT="${1:-$WORKFLOW_DIR}"

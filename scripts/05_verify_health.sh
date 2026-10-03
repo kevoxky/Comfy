@@ -114,6 +114,12 @@ if not ffmpeg_bin:
     except ImportError:
         pass
 
+if not ffmpeg_bin:
+    print("   ℹ Instalando FFmpeg del sistema al vuelo...")
+    subprocess.run(["apt-get", "update", "-qq"], check=False)
+    subprocess.run(["apt-get", "install", "-y", "-qq", "ffmpeg"], check=False)
+    ffmpeg_bin = shutil.which("ffmpeg")
+
 if ffmpeg_bin:
     try:
         res = subprocess.run([ffmpeg_bin, "-version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -134,8 +140,13 @@ failed_mod = []
 for mod in required_modules:
     try:
         __import__(mod)
-    except ImportError as ie:
-        failed_mod.append(f"{mod} ({ie})")
+    except ImportError:
+        print(f"   ℹ Módulo {mod} ausente. Auto-instalando al vuelo...")
+        subprocess.run([sys.executable, "-m", "pip", "install", mod, "-q"], check=False)
+        try:
+            __import__(mod)
+        except ImportError as ie:
+            failed_mod.append(f"{mod} ({ie})")
 
 if not failed_mod:
     check_pass("5", "Python dependencies")
@@ -166,7 +177,7 @@ else:
 wf_file = os.path.join(workflow_dir, "workflow.json")
 verify_script = os.path.join(base_dir, "scripts/verify_workflow.py")
 if os.path.isfile(wf_file) and os.path.isfile(verify_script):
-    res_wf = subprocess.run([sys.executable, verify_script], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    res_wf = subprocess.run([sys.executable, verify_script, wf_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     if res_wf.returncode == 0:
         check_pass("7", "Workflow validation")
     else:

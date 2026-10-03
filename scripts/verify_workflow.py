@@ -9,7 +9,9 @@ import sys
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-def verify_workflow(wf_path="workflows/commercial_product_video/workflow.json"):
+def verify_workflow(wf_path=None):
+    if not wf_path:
+        wf_path = sys.argv[1] if len(sys.argv) > 1 else "workflows/commercial_product_video/workflow.json"
     print(f"=== Verificando Workflow: {wf_path} ===")
     with open(wf_path, "r", encoding="utf-8") as f:
         wf = json.load(f)

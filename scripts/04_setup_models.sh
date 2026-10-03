@@ -21,17 +21,21 @@ fi
 echo -e "${BLUE}=== [4/6] Descargando Modelos para: ${WORKFLOW_NAME:-Workflow} (aria2c 16-Hilos)... ===${NC}"
 
 python3 - << 'PYEOF'
-import json, os, subprocess
+import json, os, subprocess, sys
 
+base_dir = os.environ.get("BASE_DIR", ".")
 workflow_dir = os.environ.get("WORKFLOW_DIR", "")
 config_path = os.path.join(workflow_dir, "models.json") if workflow_dir else ""
 
 if not config_path or not os.path.exists(config_path):
+    config_path = os.path.join(base_dir, "configs/models.json")
+
+if not os.path.exists(config_path):
     config_path = "configs/models.json"
 
 if not os.path.exists(config_path):
     print(f"⚠ No se encontró archivo de modelos en {config_path}")
-    exit(1)
+    sys.exit(1)
 
 print(f"Leyendo catálogo de modelos desde: \033[1m{config_path}\033[0m")
 with open(config_path, "r", encoding="utf-8") as f:
@@ -66,13 +70,26 @@ for idx, m in enumerate(models, 1):
         "-x", "16",
         "-s", "16",
         "-k", "1M",
+        "--max-tries=5",
+        "--retry-wait=3",
+        "--connect-timeout=20",
+        "--timeout=60",
+        "--allow-overwrite=true",
         "-c",
         "-d", dest_dir,
         "-o", filename,
         url
     ]
-    subprocess.run(cmd, check=True)
-    print(f"   \033[0;32m✓ Descarga completada: {filename}\033[0m")
+    try:
+        subprocess.run(cmd, check=True)
+        print(f"   \033[0;32m✓ Descarga completada: {filename}\033[0m")
+    except subprocess.CalledProcessError as e:
+        print(f"   \033[1;33m⚠ Reintentando descarga de {filename}...\033[0m")
+        res = subprocess.run(cmd, check=False)
+        if res.returncode == 0:
+            print(f"   \033[0;32m✓ Descarga completada en reintento: {filename}\033[0m")
+        else:
+            print(f"   \033[1;31m⚠ Descarga de {filename} tuvo dificultades. Continuando con los demás modelos...\033[0m")
 PYEOF
 
 # Copiar el workflow específico a ComfyUI

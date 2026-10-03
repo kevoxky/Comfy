@@ -89,22 +89,35 @@ fi
 # 3. Localizar o definir COMFY_ROOT
 echo -e "\n${BLUE}=== Localizando instalación de ComfyUI... ===${NC}"
 COMFY_DIR=""
-POSSIBLE_PATHS=(
-    "$COMFY_ROOT"
-    "$COMFY_PATH"
-    "/workspace/runpod-slim/ComfyUI"
-    "/workspace/ComfyUI"
-    "/root/ComfyUI"
-    "$(pwd)/../ComfyUI"
-    "$(pwd)/ComfyUI"
-)
 
-for p in "${POSSIBLE_PATHS[@]}"; do
-    if [ -n "$p" ] && [ -f "$p/main.py" ]; then
-        COMFY_DIR="$p"
-        break
+# Si ComfyUI ya está en ejecución (muy común en plantillas RunPod), detectar su ruta real
+RUNNING_PID=$(pgrep -f "main.py" | head -n 1 || true)
+if [ -n "$RUNNING_PID" ]; then
+    DETECTED_CWD=$(readlink -f /proc/$RUNNING_PID/cwd 2>/dev/null || pwdx $RUNNING_PID 2>/dev/null | awk '{print $2}' || true)
+    if [ -n "$DETECTED_CWD" ] && [ -f "$DETECTED_CWD/main.py" ]; then
+        COMFY_DIR="$DETECTED_CWD"
+        echo -e "${GREEN}✓ ComfyUI en ejecución detectado en:${NC} $COMFY_DIR"
     fi
-done
+fi
+
+if [ -z "$COMFY_DIR" ]; then
+    POSSIBLE_PATHS=(
+        "$COMFY_ROOT"
+        "$COMFY_PATH"
+        "/workspace/runpod-slim/ComfyUI"
+        "/workspace/ComfyUI"
+        "/root/ComfyUI"
+        "$(pwd)/../ComfyUI"
+        "$(pwd)/ComfyUI"
+    )
+
+    for p in "${POSSIBLE_PATHS[@]}"; do
+        if [ -n "$p" ] && [ -f "$p/main.py" ]; then
+            COMFY_DIR="$p"
+            break
+        fi
+    done
+fi
 
 if [ -z "$COMFY_DIR" ]; then
     if [ -d "/workspace/runpod-slim" ]; then
@@ -132,17 +145,21 @@ fi
 TARGET_WORKFLOW_ABS="$(cd "$TARGET_WORKFLOW" 2>/dev/null && pwd || echo "$TARGET_WORKFLOW")"
 WORKFLOW_NAME="$(basename "$TARGET_WORKFLOW_ABS")"
 
+BASE_DIR_RESOLVED="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
 echo -e "${GREEN}✓ Workflow Objetivo Seleccionado:${NC} $WORKFLOW_NAME"
 echo -e "   Directorio: $TARGET_WORKFLOW_ABS"
 
 # 5. Guardar variables persistentes para los siguientes pasos
 cat << EOF > .env.runtime
+export BASE_DIR="$BASE_DIR_RESOLVED"
 export COMFY_ROOT="$COMFY_DIR"
 export WORKFLOW_DIR="$TARGET_WORKFLOW_ABS"
 export WORKFLOW_NAME="$WORKFLOW_NAME"
 export GPU_NAME="$GPU_NAME"
 export GPU_ARCH="$GPU_ARCH"
 export GPU_VRAM="$VRAM_DISPLAY"
+export GIT_TERMINAL_PROMPT="0"
 EOF
 chmod +x .env.runtime
 echo -e "${GREEN}✓ Entorno y perfil de GPU registrados en .env.runtime${NC}"
