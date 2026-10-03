@@ -42,6 +42,9 @@ with open(config_path, "r", encoding="utf-8") as f:
 comfy_root = os.environ.get("COMFY_ROOT", "/workspace/runpod-slim/ComfyUI")
 custom_nodes_dir = os.path.join(comfy_root, "custom_nodes")
 
+clone_env = os.environ.copy()
+clone_env["GIT_TERMINAL_PROMPT"] = "0"
+
 for node in nodes:
     name = node.get("name")
     git_url = node.get("git_url")
@@ -52,10 +55,13 @@ for node in nodes:
     print(f"\n📦 Procesando Nodo: \033[1m{name}\033[0m")
     if not os.path.exists(target_path):
         print(f"   ⬇ Clonando desde {git_url}...")
-        subprocess.run(["git", "clone", git_url, target_path], check=True)
+        res = subprocess.run(["git", "clone", git_url, target_path], env=clone_env, check=False)
+        if res.returncode != 0:
+            print(f"   ⚠ Advertencia: No se pudo clonar {name}. Se continuará con los siguientes.")
+            continue
     else:
         print(f"   ✓ Ya existe. Actualizando rama...")
-        subprocess.run(["git", "-C", target_path, "pull"], check=False)
+        subprocess.run(["git", "-C", target_path, "pull"], env=clone_env, check=False)
 
     req_file = os.path.join(target_path, "requirements.txt")
     if os.path.exists(req_file):

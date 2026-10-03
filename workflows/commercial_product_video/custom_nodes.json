@@ -50,11 +50,6 @@
     "description": "Motor de video cinemático Image-to-Video de última generación (Wan 2.1 14B)"
   },
   {
-    "name": "comfyui_mini_max",
-    "git_url": "https://github.com/chflame163/comfyui_mini_max.git",
-    "description": "Generación de video cinematográfico publicitario con MiniMax H3 / Hailuo"
-  },
-  {
     "name": "ComfyUI-GGUF",
     "git_url": "https://github.com/city96/ComfyUI-GGUF.git",
     "description": "Cargador universal de modelos cuantizados GGUF (FLUX, DiTs, UNETs)"
