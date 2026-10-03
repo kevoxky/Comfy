@@ -105,15 +105,15 @@ for c_root in candidate_comfy_roots:
                     print(f"   ✓ Imagen demo copiada a {c_input_dir}: {img_name}")
 
 # 4. Desplegar workflow.json en la biblioteca de ComfyUI (user/default/workflows/)
-for c_root in candidate_comfy_roots:
-    if os.path.isdir(c_root):
-        c_wf_dir = os.path.join(c_root, "user", "default", "workflows")
-        os.makedirs(c_wf_dir, exist_ok=True)
-        repo_wf_path = os.path.join(workflow_dir, "workflow.json") if workflow_dir else os.path.join(base_dir, "workflows/commercial_product_video/workflow.json")
-        if os.path.isfile(repo_wf_path):
+repo_wf_path = os.path.join(workflow_dir, "workflow.json") if workflow_dir else os.path.join(base_dir, "workflows/commercial_product_video/workflow.json")
+if os.path.isfile(repo_wf_path):
+    for c_root in candidate_comfy_roots:
+        if os.path.isdir(c_root):
+            c_wf_dir = os.path.join(c_root, "user", "default", "workflows")
+            os.makedirs(c_wf_dir, exist_ok=True)
             dst_wf_path = os.path.join(c_wf_dir, "commercial_product_video.json")
             shutil.copyfile(repo_wf_path, dst_wf_path)
-    print(f"   ✓ Workflow registrado en biblioteca de ComfyUI: {dst_wf_path}")
+            print(f"   ✓ Workflow registrado en: {dst_wf_path}")
 PYEOF
 
 echo -e "\n${GREEN}✓ Nodos específicos instalados correctamente.${NC}"
