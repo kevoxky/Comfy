@@ -75,7 +75,6 @@ essential_studio_nodes = [
     "ComfyUI-LLMs-Toolkit",
     "ComfyUI_LayerStyle",
     "ComfyUI-WanVideoWrapper",
-    "comfyui_mini_max",
     "ComfyUI-GGUF"
 ]
 installed_count = sum(1 for n in essential_studio_nodes if os.path.isdir(os.path.join(custom_nodes_path, n)))
